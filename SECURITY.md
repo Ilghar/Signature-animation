@@ -17,7 +17,7 @@ This project is configured to allow iframe embedding **only** from trusted domai
 
 Using `frame-ancestors *` allows **any website** to embed this signature animation in an iframe, which exposes users to several security risks:
 
-1. **Clickjacking Attacks**: Malicious sites could overlay invisible iframes over legitimate UI elements, tricking users into performing unintended actions.
+1. **Reputational/Phishing Misuse**: While this application does not have sensitive interactive elements that could be hijacked via clickjacking, malicious sites could still embed the tool to mislead users, impersonate trusted services, or misrepresent the tool's origin.
 
 2. **Phishing**: Bad actors could embed your tool on deceptive sites that impersonate trusted services.
 
@@ -88,8 +88,6 @@ After deploying with updated CSP headers:
 - ✅ **Be specific**: List only the domains you trust
 - ✅ **Regular review**: Periodically review and update your allowed domains
 - ✅ **Test thoroughly**: Verify both allowed and blocked scenarios
-- ❌ **Avoid wildcards**: Don't use `frame-ancestors *` in production
-- ❌ **Avoid 'unsafe-inline'**: Not applicable to frame-ancestors but good CSP practice
 
 ### Additional Resources
 
