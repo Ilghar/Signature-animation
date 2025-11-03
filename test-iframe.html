@@ -99,15 +99,26 @@
         <p>Testing with current GitHub Pages deployment:</p>
         <!-- SECURITY NOTE: This iframe uses sandbox="allow-scripts allow-same-origin"
              
-             Why both are required:
+             Permissions ALLOWED (required for functionality):
              - allow-scripts: Enables the JavaScript animation to run
              - allow-same-origin: Allows the iframe to load its own CSS/JS files and external 
                resources (Google Fonts, background images) via CORS
              
+             Permissions BLOCKED (by default, not specified):
+             - Form submission (allow-forms) - Not needed, no forms are submitted
+             - Popups (allow-popups) - Not needed, application has no popups
+             - Top navigation (allow-top-navigation) - Not needed, no navigation occurs
+             - Modal dialogs (allow-modals) - Not needed, uses in-page elements only
+             - Downloads (allow-downloads) - Not needed, no download functionality
+             - Orientation lock (allow-orientation-lock) - Not needed
+             - Pointer lock (allow-pointer-lock) - Not needed
+             - Presentation (allow-presentation) - Not needed
+             
              Security implications:
-             - This combination removes most sandboxing protections
+             - This combination of allow-scripts + allow-same-origin removes some sandboxing protections
              - The iframe can access cookies, localStorage, and perform same-origin requests
              - If iframe content is compromised, it could access parent page resources (if same origin)
+             - However, all unnecessary permissions (forms, popups, navigation, etc.) remain blocked
              
              This is the minimal permission set required for the animation to function.
              Removing either permission would break the application.
@@ -171,7 +182,7 @@
 
         <h2>Sandbox Security Considerations</h2>
         <div class="note">
-            <p><strong>Why these sandbox permissions are necessary:</strong></p>
+            <p><strong>Permissions ALLOWED (minimal set required for functionality):</strong></p>
             <ul>
                 <li><strong>allow-scripts:</strong> Required for the JavaScript animation to execute</li>
                 <li><strong>allow-same-origin:</strong> Required for:
@@ -182,11 +193,23 @@
                     </ul>
                 </li>
             </ul>
+            <p><strong>Permissions BLOCKED (not needed, remain restricted):</strong></p>
+            <ul>
+                <li>✅ <strong>allow-forms:</strong> Blocked - No forms are submitted in this application</li>
+                <li>✅ <strong>allow-popups:</strong> Blocked - No popup windows are created</li>
+                <li>✅ <strong>allow-top-navigation:</strong> Blocked - No navigation to other pages</li>
+                <li>✅ <strong>allow-modals:</strong> Blocked - Uses in-page elements only (no alert/confirm/prompt dialogs)</li>
+                <li>✅ <strong>allow-downloads:</strong> Blocked - No download functionality</li>
+                <li>✅ <strong>allow-orientation-lock:</strong> Blocked - Not needed</li>
+                <li>✅ <strong>allow-pointer-lock:</strong> Blocked - Not needed</li>
+                <li>✅ <strong>allow-presentation:</strong> Blocked - Not needed</li>
+            </ul>
             <p><strong>Security tradeoffs:</strong></p>
             <ul>
-                <li>✅ <strong>Good:</strong> Only the minimum required permissions are granted</li>
-                <li>✅ <strong>Good:</strong> No form, popup, or navigation permissions</li>
-                <li>⚠️ <strong>Consideration:</strong> The combination of allow-scripts + allow-same-origin removes most sandbox protections</li>
+                <li>✅ <strong>Good:</strong> Only 2 permissions granted (scripts + same-origin), all others blocked</li>
+                <li>✅ <strong>Good:</strong> No form submission, popups, navigation, or modal dialogs possible</li>
+                <li>✅ <strong>Good:</strong> This is the absolute minimum permission set for the animation to work</li>
+                <li>⚠️ <strong>Consideration:</strong> The combination of allow-scripts + allow-same-origin removes some sandbox protections</li>
                 <li>⚠️ <strong>Consideration:</strong> If iframe content were compromised, it could access cookies and localStorage</li>
             </ul>
             <p><strong>Best practice:</strong> For production use, consider hosting the iframe content on a separate subdomain 
