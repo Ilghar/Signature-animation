@@ -62,7 +62,7 @@ Help Copilot Coding Agent work efficiently by providing:
 [expected output location]
 [typical build time]
 ```
-**IMPORTANT**: [any critical notes about build process]
+**IMPORTANT:** [any critical notes about build process]
 
 **Testing**:
 ```bash
