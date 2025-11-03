@@ -8,7 +8,7 @@ https://ilghar.github.io/Signature-animation/
 
 ## Embedding in iFrames
 
-This site is designed to be embeddable in iframes on trusted sites. The configuration restricts embedding to `https://portfolio.adobe.com/*` and `https://ilghar.studio/*` to prevent clickjacking attacks.
+This site is designed to be embeddable in iframes on trusted sites. The configuration restricts embedding to `https://portfolio.adobe.com/*`, `https://*.myportfolio.com/*`, and `https://ilghar.studio/*` to prevent clickjacking attacks.
 
 ### Usage Example
 
@@ -31,7 +31,7 @@ This site is designed to be embeddable in iframes on trusted sites. The configur
 3. GitHub Pages sets its own default headers that cannot be modified
 
 **What we've done:**
-- Added HTTP headers via deployment configs to restrict iframe embedding to trusted domains (`https://portfolio.adobe.com/*` and `https://ilghar.studio/*`)
+- Added HTTP headers via deployment configs to restrict iframe embedding to trusted domains (`https://portfolio.adobe.com/*`, `https://*.myportfolio.com/*`, and `https://ilghar.studio/*`)
 - This prevents clickjacking attacks while allowing legitimate embedding on authorized sites
 - If you need to add additional domains, you can update the CSP header in the deployment config files (see SECURITY.md)
 
