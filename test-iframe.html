@@ -97,9 +97,23 @@
 
         <h2>Test 1: GitHub Pages URL</h2>
         <p>Testing with current GitHub Pages deployment:</p>
-        <!-- Note: allow-scripts and allow-same-origin are both required for this animation
-             to load external resources (Google Fonts, background images). While this reduces
-             sandboxing security, it's necessary for the app to function. -->
+        <!-- SECURITY NOTE: This iframe uses sandbox="allow-scripts allow-same-origin"
+             
+             Why both are required:
+             - allow-scripts: Enables the JavaScript animation to run
+             - allow-same-origin: Allows the iframe to load its own CSS/JS files and external 
+               resources (Google Fonts, background images) via CORS
+             
+             Security implications:
+             - This combination removes most sandboxing protections
+             - The iframe can access cookies, localStorage, and perform same-origin requests
+             - If iframe content is compromised, it could access parent page resources (if same origin)
+             
+             This is the minimal permission set required for the animation to function.
+             Removing either permission would break the application.
+             
+             Alternative: Consider hosting the iframe content on a separate subdomain to maintain
+             origin isolation while still allowing these permissions. -->
         <iframe 
             id="github-iframe"
             src="https://ilghar.github.io/Signature-animation/"
@@ -123,9 +137,8 @@
             <button onclick="checkHeaders()">Check Headers</button>
             <button onclick="clearConsole()">Clear Console</button>
         </div>
-        <!-- Note: allow-scripts and allow-same-origin are both required for this animation
-             to load external resources (Google Fonts, background images). While this reduces
-             sandboxing security, it's necessary for the app to function. -->
+        <!-- SECURITY NOTE: This iframe uses sandbox="allow-scripts allow-same-origin"
+             See detailed security explanation in the first iframe comment above. -->
         <iframe 
             id="netlify-iframe"
             title="Signature animation on Netlify"
@@ -142,6 +155,12 @@
 
         <h2>Expected Iframe Code for Adobe Portfolio</h2>
         <p>Use this code in Adobe Portfolio after deploying to Netlify:</p>
+        <div class="note">
+            <strong>⚠️ Security Note:</strong> The sandbox attribute uses both <code>allow-scripts</code> and 
+            <code>allow-same-origin</code>, which are the minimum permissions required for this animation to function. 
+            While this reduces sandboxing protection, it's necessary for loading external resources and running the animation. 
+            For improved security, consider hosting the iframe on a separate subdomain.
+        </div>
         <div class="code-block">
 &lt;iframe
   src="https://your-site-name.netlify.app"
@@ -150,6 +169,30 @@
   loading="lazy"
   sandbox="allow-scripts allow-same-origin"&gt;
 &lt;/iframe&gt;
+        </div>
+
+        <h2>Sandbox Security Considerations</h2>
+        <div class="note">
+            <p><strong>Why these sandbox permissions are necessary:</strong></p>
+            <ul>
+                <li><strong>allow-scripts:</strong> Required for the JavaScript animation to execute</li>
+                <li><strong>allow-same-origin:</strong> Required for:
+                    <ul>
+                        <li>Loading the iframe's own CSS and JavaScript files</li>
+                        <li>Accessing external resources (Google Fonts, background images) via CORS</li>
+                        <li>Proper functioning of the animation</li>
+                    </ul>
+                </li>
+            </ul>
+            <p><strong>Security tradeoffs:</strong></p>
+            <ul>
+                <li>✅ <strong>Good:</strong> Only the minimum required permissions are granted</li>
+                <li>✅ <strong>Good:</strong> No form, popup, or navigation permissions</li>
+                <li>⚠️ <strong>Consideration:</strong> The combination of allow-scripts + allow-same-origin removes most sandbox protections</li>
+                <li>⚠️ <strong>Consideration:</strong> If iframe content were compromised, it could access cookies and localStorage</li>
+            </ul>
+            <p><strong>Best practice:</strong> For production use, consider hosting the iframe content on a separate subdomain 
+            (e.g., animation.yourdomain.com) to maintain origin isolation while still allowing these necessary permissions.</p>
         </div>
 
         <h2>Troubleshooting</h2>
