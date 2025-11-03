@@ -19,9 +19,7 @@ Using `frame-ancestors *` allows **any website** to embed this signature animati
 
 1. **Reputational/Phishing Misuse**: While this application does not have sensitive interactive elements that could be hijacked via clickjacking, malicious sites could still embed the tool to mislead users, impersonate trusted services, or misrepresent the tool's origin.
 
-2. **Phishing**: Bad actors could embed your tool on deceptive sites that impersonate trusted services.
-
-3. **Context Confusion**: Users might not realize they're interacting with embedded content on an untrusted site.
+2. **Context Confusion**: Users might not realize they're interacting with embedded content on an untrusted site.
 
 ### Adding Additional Domains
 
