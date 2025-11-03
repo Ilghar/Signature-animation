@@ -8,7 +8,7 @@ This project is configured to allow iframe embedding **only** from trusted domai
 
 **Allowed domains:**
 - `https://portfolio.adobe.com/*` - Adobe Portfolio
-- `https://*.myportfolio.com/*` - Adobe MyPortfolio (wildcard subdomain support)
+- `https://*.myportfolio.com/*` - Adobe Portfolio custom domains (e.g., username.myportfolio.com)
 - `https://ilghar.studio/*` - Custom domain
 
 ### Security Rationale
@@ -82,10 +82,10 @@ After deploying with updated CSP headers:
 
 ### Security Best Practices
 
-- ✅ **Use HTTPS**: Always specify `https://` in frame-ancestors
-- ✅ **Be specific**: List only the domains you trust
-- ✅ **Regular review**: Periodically review and update your allowed domains
-- ✅ **Test thoroughly**: Verify both allowed and blocked scenarios
+- **Use HTTPS**: Always specify `https://` in frame-ancestors
+- **Be specific**: List only the domains you trust
+- **Regular review**: Periodically review and update your allowed domains
+- **Test thoroughly**: Verify both allowed and blocked scenarios
 
 ### Additional Resources
 
