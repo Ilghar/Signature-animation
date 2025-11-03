@@ -120,11 +120,15 @@
              - If iframe content is compromised, it could access parent page resources (if same origin)
              - However, all unnecessary permissions (forms, popups, navigation, etc.) remain blocked
              
-             This is the minimal permission set required for the animation to function.
-             Removing either permission would break the application.
+             Security tradeoffs:
+             - ⚠️ The combination of allow-scripts + allow-same-origin removes most sandbox protections
+             - ⚠️ If iframe content is compromised, it could access cookies, localStorage, and perform same-origin requests
+             - ⚠️ If embedded on the same origin as parent, could potentially access parent page resources
+             - ✅ All unnecessary permissions are explicitly denied
+             - ✅ Cannot submit forms, show popups, or navigate the parent page
              
-             Alternative: Consider hosting the iframe content on a separate subdomain to maintain
-             origin isolation while still allowing these permissions. -->
+             Best practice: Host the iframe content on a separate subdomain (e.g., animation.yourdomain.com) 
+             to maintain origin isolation while still allowing these necessary permissions. -->
         <iframe 
             id="github-iframe"
             src="https://ilghar.github.io/Signature-animation/"
@@ -148,7 +152,7 @@
             <button onclick="checkHeaders()">Check Headers</button>
             <button onclick="clearConsole()">Clear Console</button>
         </div>
-        <!-- SECURITY NOTE: This iframe uses sandbox="allow-scripts allow-same-origin"
+        <!-- SECURITY NOTE: Minimal sandbox permissions (allow-scripts allow-same-origin).
              See detailed security explanation in the first iframe comment above. -->
         <iframe 
             id="netlify-iframe"
@@ -212,8 +216,6 @@
                 <li>⚠️ <strong>Consideration:</strong> The combination of allow-scripts + allow-same-origin removes some sandbox protections</li>
                 <li>⚠️ <strong>Consideration:</strong> If iframe content were compromised, it could access cookies and localStorage</li>
             </ul>
-            <p><strong>Best practice:</strong> For production use, consider hosting the iframe content on a separate subdomain 
-            (e.g., animation.yourdomain.com) to maintain origin isolation while still allowing these necessary permissions.</p>
         </div>
 
         <h2>Troubleshooting</h2>
