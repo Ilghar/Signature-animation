@@ -99,19 +99,26 @@
         <p>Testing with current GitHub Pages deployment:</p>
         <!-- SECURITY NOTE: This iframe uses sandbox="allow-scripts allow-same-origin"
              
-             Permissions GRANTED (minimal required set):
+             Permissions ALLOWED (required for functionality):
              - allow-scripts: Enables the JavaScript animation to run
              - allow-same-origin: Allows the iframe to load its own CSS/JS files and external 
                resources (Google Fonts, background images) via CORS
              
-             Permissions NOT GRANTED (for better security):
-             - allow-forms: Not needed - input field doesn't submit forms
-             - allow-modals: Not needed - no alerts, confirms, or prompts
-             - allow-popups: Not needed - no popups or new windows
-             - allow-top-navigation: Not needed - iframe doesn't navigate parent page
-             - allow-downloads: Not needed - no file downloads
-             - allow-pointer-lock: Not needed - no pointer locking
-             - allow-presentation: Not needed - no presentation mode
+             Permissions BLOCKED (by default, not specified):
+             - Form submission (allow-forms) - Not needed, no forms are submitted
+             - Popups (allow-popups) - Not needed, application has no popups
+             - Top navigation (allow-top-navigation) - Not needed, no navigation occurs
+             - Modal dialogs (allow-modals) - Not needed, uses in-page elements only
+             - Downloads (allow-downloads) - Not needed, no download functionality
+             - Orientation lock (allow-orientation-lock) - Not needed
+             - Pointer lock (allow-pointer-lock) - Not needed
+             - Presentation (allow-presentation) - Not needed
+             
+             Security implications:
+             - This combination of allow-scripts + allow-same-origin removes some sandboxing protections
+             - The iframe can access cookies, localStorage, and perform same-origin requests
+             - If iframe content is compromised, it could access parent page resources (if same origin)
+             - However, all unnecessary permissions (forms, popups, navigation, etc.) remain blocked
              
              Security tradeoffs:
              - ⚠️ The combination of allow-scripts + allow-same-origin removes most sandbox protections
@@ -179,7 +186,7 @@
 
         <h2>Sandbox Security Considerations</h2>
         <div class="note">
-            <p><strong>Permissions GRANTED (minimum required):</strong></p>
+            <p><strong>Permissions ALLOWED (minimal set required for functionality):</strong></p>
             <ul>
                 <li><strong>allow-scripts:</strong> Required for the JavaScript animation to execute</li>
                 <li><strong>allow-same-origin:</strong> Required for:
@@ -190,30 +197,24 @@
                     </ul>
                 </li>
             </ul>
-            <p><strong>Permissions EXPLICITLY NOT GRANTED (for better security):</strong></p>
+            <p><strong>Permissions BLOCKED (not needed, remain restricted):</strong></p>
             <ul>
-                <li>❌ <strong>allow-forms:</strong> Input field doesn't submit forms - not needed</li>
-                <li>❌ <strong>allow-modals:</strong> No alerts, confirms, or prompts - not needed</li>
-                <li>❌ <strong>allow-popups:</strong> No popups or new windows - not needed</li>
-                <li>❌ <strong>allow-top-navigation:</strong> Iframe cannot navigate parent page - not needed</li>
-                <li>❌ <strong>allow-downloads:</strong> No file downloads - not needed</li>
-                <li>❌ <strong>allow-pointer-lock:</strong> No pointer locking - not needed</li>
-                <li>❌ <strong>allow-presentation:</strong> No presentation mode - not needed</li>
+                <li>✅ <strong>allow-forms:</strong> Blocked - No forms are submitted in this application</li>
+                <li>✅ <strong>allow-popups:</strong> Blocked - No popup windows are created</li>
+                <li>✅ <strong>allow-top-navigation:</strong> Blocked - No navigation to other pages</li>
+                <li>✅ <strong>allow-modals:</strong> Blocked - Uses in-page elements only (no alert/confirm/prompt dialogs)</li>
+                <li>✅ <strong>allow-downloads:</strong> Blocked - No download functionality</li>
+                <li>✅ <strong>allow-orientation-lock:</strong> Blocked - Not needed</li>
+                <li>✅ <strong>allow-pointer-lock:</strong> Blocked - Not needed</li>
+                <li>✅ <strong>allow-presentation:</strong> Blocked - Not needed</li>
             </ul>
             <p><strong>Security tradeoffs:</strong></p>
             <ul>
-                <li>✅ <strong>Good:</strong> Only 2 out of 11+ possible permissions are granted</li>
-                <li>✅ <strong>Good:</strong> Cannot submit forms, show popups, navigate parent, or download files</li>
-                <li>✅ <strong>Good:</strong> All unnecessary permissions are explicitly denied by omission</li>
-                <li>⚠️ <strong>Tradeoff:</strong> The combination of allow-scripts + allow-same-origin removes most sandbox protections</li>
-                <li>⚠️ <strong>Tradeoff:</strong> If iframe content were compromised, it could access cookies and localStorage</li>
-                <li>⚠️ <strong>Tradeoff:</strong> If embedded on same origin as parent, could potentially access parent resources</li>
-            </ul>
-            <p><strong>Mitigation strategies:</strong></p>
-            <ul>
-                <li><strong>Best practice:</strong> Host iframe content on a separate subdomain (e.g., animation.yourdomain.com) to maintain origin isolation</li>
-                <li><strong>Alternative:</strong> Use a separate domain entirely for iframe content</li>
-                <li><strong>Note:</strong> These two permissions are the absolute minimum - removing either would break the application entirely</li>
+                <li>✅ <strong>Good:</strong> Only 2 permissions granted (scripts + same-origin), all others blocked</li>
+                <li>✅ <strong>Good:</strong> No form submission, popups, navigation, or modal dialogs possible</li>
+                <li>✅ <strong>Good:</strong> This is the absolute minimum permission set for the animation to work</li>
+                <li>⚠️ <strong>Consideration:</strong> The combination of allow-scripts + allow-same-origin removes some sandbox protections</li>
+                <li>⚠️ <strong>Consideration:</strong> If iframe content were compromised, it could access cookies and localStorage</li>
             </ul>
         </div>
 
