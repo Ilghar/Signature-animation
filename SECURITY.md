@@ -8,6 +8,7 @@ This project is configured to allow iframe embedding **only** from trusted domai
 
 **Allowed domains:**
 - `https://portfolio.adobe.com/*` - Adobe Portfolio
+- `https://*.myportfolio.com/*` - Adobe MyPortfolio (wildcard subdomain support)
 - `https://ilghar.studio/*` - Custom domain
 
 ### Security Rationale
@@ -32,13 +33,13 @@ Edit `netlify.toml`:
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "frame-ancestors https://portfolio.adobe.com/* https://ilghar.studio/* https://www.yourname.com"
+    Content-Security-Policy = "frame-ancestors https://portfolio.adobe.com/* https://*.myportfolio.com/* https://ilghar.studio/* https://www.yourname.com"
 ```
 
 Or edit `_headers`:
 ```
 /*
-  Content-Security-Policy: frame-ancestors https://portfolio.adobe.com/* https://ilghar.studio/* https://www.yourname.com
+  Content-Security-Policy: frame-ancestors https://portfolio.adobe.com/* https://*.myportfolio.com/* https://ilghar.studio/* https://www.yourname.com
 ```
 
 #### For Vercel:
@@ -51,7 +52,7 @@ Edit `vercel.json`:
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "frame-ancestors https://portfolio.adobe.com/* https://ilghar.studio/* https://www.yourname.com"
+          "value": "frame-ancestors https://portfolio.adobe.com/* https://*.myportfolio.com/* https://ilghar.studio/* https://www.yourname.com"
         }
       ]
     }
@@ -70,7 +71,7 @@ If you need to embed this on other platforms:
 
 Example for multiple specific domains:
 ```
-frame-ancestors https://portfolio.adobe.com/* https://ilghar.studio/* https://example.com https://www.example.com
+frame-ancestors https://portfolio.adobe.com/* https://*.myportfolio.com/* https://ilghar.studio/* https://example.com https://www.example.com
 ```
 
 ### Testing Your Configuration
