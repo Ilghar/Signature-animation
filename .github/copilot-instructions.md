@@ -79,7 +79,7 @@ python3 -m http.server 8000  # Recommended
 
 - SVG viewBox values (`index.html`) - Precisely calibrated per letter
 - `stroke-dasharray` values (`style.css`) - Must match exact SVG path lengths
-- Letter detection logic (`script.js` lines 37-62) - Alphabet iteration and case handling
+- Letter detection logic (main event handler in `script.js`) - Alphabet iteration and case handling
 - Deployment configs (`netlify.toml`, `vercel.json`, `_headers`) - Security and iframe embedding
 
 ## Security & CSP
