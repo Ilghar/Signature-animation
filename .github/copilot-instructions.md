@@ -73,7 +73,7 @@ python3 -m http.server 8000  # Recommended
 
 **Animation Timing**: Change `transition: 1s ease` in `.signature-main svg path` (global speed) or `setTimeout(..., 50)` in `script.js` line 53 (letter delay)
 
-**iframe Domains**: Edit `netlify.toml`, `vercel.json`, `_headers` → add to `frame-ancestors` → redeploy → test with `test-iframe.html`. **WARNING**: Don't confuse with separate Netlify deployment project.
+**iframe Domains**: Edit `netlify.toml`, `vercel.json`, `_headers` → add to `frame-ancestors` → redeploy → test with `test-iframe.html`.
 
 ## Critical Files - DO NOT MODIFY Without Deep Understanding
 
