@@ -1,6 +1,6 @@
 # Headers for Netlify and Cloudflare Pages
 # Security: Restricted to Adobe Portfolio domains to prevent clickjacking attacks
-# If using a custom domain, add it here: "frame-ancestors https://*.myportfolio.com https://yourdomain.com"
+# If using a custom domain, add it here: "frame-ancestors https://portfolio.adobe.com/* https://ilghar.studio/*"
 # Note: CSP frame-ancestors takes precedence over X-Frame-Options
 
 /*
