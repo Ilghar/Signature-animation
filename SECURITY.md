@@ -87,8 +87,6 @@ After deploying with updated CSP headers:
 - ✅ **Be specific**: List only the domains you trust
 - ✅ **Regular review**: Periodically review and update your allowed domains
 - ✅ **Test thoroughly**: Verify both allowed and blocked scenarios
-- ❌ **Avoid wildcards**: Don't use `frame-ancestors *` in production
-- ❌ **Avoid 'unsafe-inline'**: Not applicable to frame-ancestors but good CSP practice
 
 ### Additional Resources
 
