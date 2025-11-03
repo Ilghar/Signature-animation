@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "frame-ancestors https://portfolio.adobe.com/* https://ilghar.studio/*"
+          "value": "frame-ancestors https://portfolio.adobe.com/* https://*.myportfolio.com/* https://ilghar.studio/*"
         }
       ]
     }

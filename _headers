@@ -3,4 +3,4 @@
 # Note: CSP frame-ancestors takes precedence over X-Frame-Options
 
 /*
-  Content-Security-Policy: frame-ancestors https://portfolio.adobe.com/* https://ilghar.studio/*
+  Content-Security-Policy: frame-ancestors https://portfolio.adobe.com/* https://*.myportfolio.com/* https://ilghar.studio/*
