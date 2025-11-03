@@ -4,10 +4,11 @@
 
 ### Current Configuration
 
-This project is configured to allow iframe embedding **only** from Adobe Portfolio domains to prevent clickjacking attacks.
+This project is configured to allow iframe embedding **only** from trusted domains to prevent clickjacking attacks.
 
 **Allowed domains:**
-- `https://*.myportfolio.com` - Adobe Portfolio default subdomains
+- `https://portfolio.adobe.com/*` - Adobe Portfolio
+- `https://ilghar.studio/*` - Custom domain
 
 ### Security Rationale
 
@@ -21,9 +22,9 @@ Using `frame-ancestors *` allows **any website** to embed this signature animati
 
 3. **Context Confusion**: Users might not realize they're interacting with embedded content on an untrusted site.
 
-### Using Custom Domains with Adobe Portfolio
+### Adding Additional Domains
 
-If you've connected a custom domain to your Adobe Portfolio site (e.g., `www.yourname.com`), you'll need to add it to the CSP configuration:
+If you need to allow embedding from additional domains, you can add them to the CSP configuration:
 
 #### For Netlify:
 Edit `netlify.toml`:
@@ -31,13 +32,13 @@ Edit `netlify.toml`:
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "frame-ancestors https://*.myportfolio.com https://www.yourname.com"
+    Content-Security-Policy = "frame-ancestors https://portfolio.adobe.com/* https://ilghar.studio/* https://www.yourname.com"
 ```
 
 Or edit `_headers`:
 ```
 /*
-  Content-Security-Policy: frame-ancestors https://*.myportfolio.com https://www.yourname.com
+  Content-Security-Policy: frame-ancestors https://portfolio.adobe.com/* https://ilghar.studio/* https://www.yourname.com
 ```
 
 #### For Vercel:
@@ -50,7 +51,7 @@ Edit `vercel.json`:
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "frame-ancestors https://*.myportfolio.com https://www.yourname.com"
+          "value": "frame-ancestors https://portfolio.adobe.com/* https://ilghar.studio/* https://www.yourname.com"
         }
       ]
     }
@@ -69,7 +70,7 @@ If you need to embed this on other platforms:
 
 Example for multiple specific domains:
 ```
-frame-ancestors https://*.myportfolio.com https://example.com https://www.example.com
+frame-ancestors https://portfolio.adobe.com/* https://ilghar.studio/* https://example.com https://www.example.com
 ```
 
 ### Testing Your Configuration
