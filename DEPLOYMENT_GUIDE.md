@@ -152,8 +152,9 @@ If you have a custom domain and want to keep GitHub Pages:
      const response = await fetch(request)
      const newHeaders = new Headers(response.headers)
      
-     // Add headers to allow iframe embedding
-     newHeaders.set('X-Frame-Options', 'ALLOWALL')
+     // Add CSP header to allow iframe embedding
+     // Note: Removing X-Frame-Options to let CSP take precedence
+     newHeaders.delete('X-Frame-Options')
      newHeaders.set('Content-Security-Policy', 'frame-ancestors *')
      
      return new Response(response.body, {
@@ -213,7 +214,7 @@ fetch('https://your-new-url.com', {method: 'HEAD'})
 ```
 
 Look for:
-- `x-frame-options: ALLOWALL` or absence of this header
+- Absence of `x-frame-options: DENY` (or no X-Frame-Options header at all)
 - `content-security-policy: frame-ancestors *`
 
 ### 2. Test in Adobe Portfolio

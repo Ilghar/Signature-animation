@@ -155,13 +155,14 @@
         </ul>
 
         <h2>Header Requirements</h2>
-        <p>For iframe embedding to work, the server must send:</p>
+        <p>For iframe embedding to work, the server should send:</p>
         <div class="code-block">
-X-Frame-Options: ALLOWALL
-<br>OR<br>
 Content-Security-Policy: frame-ancestors *
 <br><br>
-<em>✅ These are automatically configured in the deployment files (_headers, netlify.toml, vercel.json)</em>
+<strong>And should NOT send:</strong><br>
+X-Frame-Options: DENY
+<br><br>
+<em>✅ The correct CSP header is automatically configured in the deployment files (_headers, netlify.toml, vercel.json)</em>
         </div>
     </div>
 
@@ -237,13 +238,35 @@ Content-Security-Policy: frame-ancestors *
                 const xFrameOptions = response.headers.get('x-frame-options');
                 const csp = response.headers.get('content-security-policy');
                 
-                log(`X-Frame-Options: ${xFrameOptions || 'Not set'}`, xFrameOptions ? 'error' : 'success');
+                // Check X-Frame-Options
+                if (xFrameOptions) {
+                    const xfoUpper = xFrameOptions.toUpperCase();
+                    if (xfoUpper === 'DENY') {
+                        log(`X-Frame-Options: ${xFrameOptions} (will block iframe)`, 'error');
+                    } else if (xfoUpper === 'SAMEORIGIN') {
+                        log(`X-Frame-Options: ${xFrameOptions} (allows same-origin only)`, 'info');
+                    } else {
+                        log(`X-Frame-Options: ${xFrameOptions}`, 'info');
+                    }
+                } else {
+                    log('X-Frame-Options: Not set (good for iframe embedding)', 'success');
+                }
+                
                 log(`Content-Security-Policy: ${csp || 'Not set'}`, 'info');
                 
-                if (!xFrameOptions || xFrameOptions === 'ALLOWALL') {
-                    log('✅ Headers allow iframe embedding!', 'success');
+                // Determine if embedding will work
+                if (xFrameOptions && xFrameOptions.toUpperCase() === 'DENY') {
+                    log('❌ X-Frame-Options: DENY will block iframe embedding', 'error');
+                } else if (csp && csp.includes('frame-ancestors')) {
+                    if (csp.includes('frame-ancestors *') || csp.includes("frame-ancestors 'none'") === false) {
+                        log('✅ CSP frame-ancestors allows iframe embedding!', 'success');
+                    } else {
+                        log('⚠️ CSP frame-ancestors may restrict embedding', 'info');
+                    }
+                } else if (!xFrameOptions) {
+                    log('✅ No restrictive headers - iframe embedding should work!', 'success');
                 } else {
-                    log('❌ X-Frame-Options will block iframe embedding', 'error');
+                    log('ℹ️ Check actual embedding to verify', 'info');
                 }
             } catch (error) {
                 log(`Error checking headers: ${error.message}`, 'error');

@@ -133,7 +133,6 @@ Platforms that support custom headers:
    - Add `_headers` file:
      ```
      /*
-       X-Frame-Options: ALLOWALL
        Content-Security-Policy: frame-ancestors *
      ```
    - Or use `netlify.toml`:
@@ -141,7 +140,6 @@ Platforms that support custom headers:
      [[headers]]
        for = "/*"
        [headers.values]
-         X-Frame-Options = "ALLOWALL"
          Content-Security-Policy = "frame-ancestors *"
      ```
 
@@ -154,10 +152,6 @@ Platforms that support custom headers:
            "source": "/(.*)",
            "headers": [
              {
-               "key": "X-Frame-Options",
-               "value": "ALLOWALL"
-             },
-             {
                "key": "Content-Security-Policy",
                "value": "frame-ancestors *"
              }
@@ -166,6 +160,8 @@ Platforms that support custom headers:
        ]
      }
      ```
+   
+   Note: The configuration files in this repository use the modern CSP approach instead of the deprecated X-Frame-Options header.
 
 3. **Cloudflare Pages** (Free tier available)
    - Add `_headers` file similar to Netlify
