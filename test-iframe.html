@@ -87,7 +87,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>🧪 Iframe Embedding Test</h1>
+        <h1>🪪 Iframe Embedding Test</h1>
         
         <div class="note">
             <strong>⚠️ Important:</strong> This test file demonstrates how the iframe would work with proper headers.
@@ -210,9 +210,9 @@
             </ul>
             <p><strong>Security tradeoffs:</strong></p>
             <ul>
-                <li>✅ <strong>Good:</strong> Only 2 permissions granted (scripts + same-origin), all others blocked</li>
+                <li>✅ <strong>Good:</strong> Only 2 permissions granted (scripts + same-origin), all other sandbox-controlled permissions blocked</li>
                 <li>✅ <strong>Good:</strong> No form submission, popups, navigation, or modal dialogs possible</li>
-                <li>✅ <strong>Good:</strong> This is the minimum permission set required</li>
+                <li>✅ <strong>Good:</strong> This is the minimum permission set required for the current implementation</li>
                 <li>⚠️ <strong>Consideration:</strong> The combination of allow-scripts + allow-same-origin removes some sandbox protections</li>
                 <li>⚠️ <strong>Consideration:</strong> If iframe content were compromised, it could access cookies and localStorage</li>
             </ul>
