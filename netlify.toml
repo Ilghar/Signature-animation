@@ -1,8 +1,9 @@
 # Netlify configuration file
 # Alternative to _headers file
 # Note: CSP frame-ancestors takes precedence over X-Frame-Options
+# Security: Restricted to Adobe Portfolio and custom domains to prevent clickjacking attacks
 
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "frame-ancestors *"
+    Content-Security-Policy = "frame-ancestors https://portfolio.adobe.com/* https://ilghar.studio/*"
