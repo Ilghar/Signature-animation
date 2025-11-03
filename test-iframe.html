@@ -99,21 +99,29 @@
         <p>Testing with current GitHub Pages deployment:</p>
         <!-- SECURITY NOTE: This iframe uses sandbox="allow-scripts allow-same-origin"
              
-             Why both are required:
+             Permissions GRANTED (minimal required set):
              - allow-scripts: Enables the JavaScript animation to run
              - allow-same-origin: Allows the iframe to load its own CSS/JS files and external 
                resources (Google Fonts, background images) via CORS
              
-             Security implications:
-             - This combination removes most sandboxing protections
-             - The iframe can access cookies, localStorage, and perform same-origin requests
-             - If iframe content is compromised, it could access parent page resources (if same origin)
+             Permissions NOT GRANTED (for better security):
+             - allow-forms: Not needed - input field doesn't submit forms
+             - allow-modals: Not needed - no alerts, confirms, or prompts
+             - allow-popups: Not needed - no popups or new windows
+             - allow-top-navigation: Not needed - iframe doesn't navigate parent page
+             - allow-downloads: Not needed - no file downloads
+             - allow-pointer-lock: Not needed - no pointer locking
+             - allow-presentation: Not needed - no presentation mode
              
-             This is the minimal permission set required for the animation to function.
-             Removing either permission would break the application.
+             Security tradeoffs:
+             - ⚠️ The combination of allow-scripts + allow-same-origin removes most sandbox protections
+             - ⚠️ If iframe content is compromised, it could access cookies, localStorage, and perform same-origin requests
+             - ⚠️ If embedded on the same origin as parent, could potentially access parent page resources
+             - ✅ All unnecessary permissions are explicitly denied
+             - ✅ Cannot submit forms, show popups, or navigate the parent page
              
-             Alternative: Consider hosting the iframe content on a separate subdomain to maintain
-             origin isolation while still allowing these permissions. -->
+             Best practice: Host the iframe content on a separate subdomain (e.g., animation.yourdomain.com) 
+             to maintain origin isolation while still allowing these necessary permissions. -->
         <iframe 
             id="github-iframe"
             src="https://ilghar.github.io/Signature-animation/"
@@ -137,7 +145,7 @@
             <button onclick="checkHeaders()">Check Headers</button>
             <button onclick="clearConsole()">Clear Console</button>
         </div>
-        <!-- SECURITY NOTE: This iframe uses sandbox="allow-scripts allow-same-origin"
+        <!-- SECURITY NOTE: Minimal sandbox permissions (allow-scripts allow-same-origin).
              See detailed security explanation in the first iframe comment above. -->
         <iframe 
             id="netlify-iframe"
@@ -171,7 +179,7 @@
 
         <h2>Sandbox Security Considerations</h2>
         <div class="note">
-            <p><strong>Why these sandbox permissions are necessary:</strong></p>
+            <p><strong>Permissions GRANTED (minimum required):</strong></p>
             <ul>
                 <li><strong>allow-scripts:</strong> Required for the JavaScript animation to execute</li>
                 <li><strong>allow-same-origin:</strong> Required for:
@@ -182,15 +190,31 @@
                     </ul>
                 </li>
             </ul>
+            <p><strong>Permissions EXPLICITLY NOT GRANTED (for better security):</strong></p>
+            <ul>
+                <li>❌ <strong>allow-forms:</strong> Input field doesn't submit forms - not needed</li>
+                <li>❌ <strong>allow-modals:</strong> No alerts, confirms, or prompts - not needed</li>
+                <li>❌ <strong>allow-popups:</strong> No popups or new windows - not needed</li>
+                <li>❌ <strong>allow-top-navigation:</strong> Iframe cannot navigate parent page - not needed</li>
+                <li>❌ <strong>allow-downloads:</strong> No file downloads - not needed</li>
+                <li>❌ <strong>allow-pointer-lock:</strong> No pointer locking - not needed</li>
+                <li>❌ <strong>allow-presentation:</strong> No presentation mode - not needed</li>
+            </ul>
             <p><strong>Security tradeoffs:</strong></p>
             <ul>
-                <li>✅ <strong>Good:</strong> Only the minimum required permissions are granted</li>
-                <li>✅ <strong>Good:</strong> No form, popup, or navigation permissions</li>
-                <li>⚠️ <strong>Consideration:</strong> The combination of allow-scripts + allow-same-origin removes most sandbox protections</li>
-                <li>⚠️ <strong>Consideration:</strong> If iframe content were compromised, it could access cookies and localStorage</li>
+                <li>✅ <strong>Good:</strong> Only 2 out of 11+ possible permissions are granted</li>
+                <li>✅ <strong>Good:</strong> Cannot submit forms, show popups, navigate parent, or download files</li>
+                <li>✅ <strong>Good:</strong> All unnecessary permissions are explicitly denied by omission</li>
+                <li>⚠️ <strong>Tradeoff:</strong> The combination of allow-scripts + allow-same-origin removes most sandbox protections</li>
+                <li>⚠️ <strong>Tradeoff:</strong> If iframe content were compromised, it could access cookies and localStorage</li>
+                <li>⚠️ <strong>Tradeoff:</strong> If embedded on same origin as parent, could potentially access parent resources</li>
             </ul>
-            <p><strong>Best practice:</strong> For production use, consider hosting the iframe content on a separate subdomain 
-            (e.g., animation.yourdomain.com) to maintain origin isolation while still allowing these necessary permissions.</p>
+            <p><strong>Mitigation strategies:</strong></p>
+            <ul>
+                <li><strong>Best practice:</strong> Host iframe content on a separate subdomain (e.g., animation.yourdomain.com) to maintain origin isolation</li>
+                <li><strong>Alternative:</strong> Use a separate domain entirely for iframe content</li>
+                <li><strong>Note:</strong> These two permissions are the absolute minimum - removing either would break the application entirely</li>
+            </ul>
         </div>
 
         <h2>Troubleshooting</h2>
