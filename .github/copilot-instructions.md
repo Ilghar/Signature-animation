@@ -19,71 +19,31 @@ This repository contains a signature animation web application that creates anim
 
 ## Development Workflow
 
-### Running the Application
+This is a static web application with no build process required. Simply open `index.html` in a web browser or use a local web server for testing (e.g., `python -m http.server` or VS Code Live Server extension).
 
-This is a static web application with no build process required:
-1. Simply open `index.html` in a web browser
-2. Or use a local web server for testing (e.g., `python -m http.server` or VS Code Live Server extension)
+**No Build System**: This project intentionally uses no build tools, bundlers, or package managers. All code is vanilla JavaScript and can run directly in the browser.
 
-### No Build System
-
-This project intentionally uses no build tools, bundlers, or package managers. All code is vanilla JavaScript and can run directly in the browser.
-
-### No Tests
-
-Currently, this project has no automated tests. Testing is done manually by:
-1. Opening the application in a browser
-2. Typing text in the input field
-3. Verifying that the signature animation appears correctly
-4. Testing with uppercase, lowercase, and mixed case letters
+**No Tests**: Currently, this project has no automated tests. Testing is done manually by opening the application in a browser, typing text in the input field, verifying that the signature animation appears correctly, and testing with uppercase, lowercase, and mixed case letters.
 
 ## Coding Standards
 
-### HTML
-- Use semantic HTML5 elements
-- Maintain proper indentation (2 spaces)
-- Keep SVG paths organized in the `.letter-bank` section
-
-### CSS
-- Use class-based selectors
-- Keep letter-specific styles organized by letter class (`.up.a`, `.lo.a`, etc.)
-- Maintain consistent spacing and indentation
-- CSS custom properties are not used; use inline values
-
-### JavaScript
-- Use modern ES6+ syntax
-- Keep code simple and readable
-- Use `const` and `let` (avoid `var`)
-- Use descriptive variable names
-- Add comments only for complex logic
+- **HTML**: Use semantic HTML5 elements, maintain proper indentation (2 spaces), keep SVG paths organized in the `.letter-bank` section
+- **CSS**: Use class-based selectors, keep letter-specific styles organized by letter class (`.up.a`, `.lo.a`, etc.), maintain consistent spacing and indentation, CSS custom properties are not used; use inline values
+- **JavaScript**: Use modern ES6+ syntax, keep code simple and readable, use `const` and `let` (avoid `var`), use descriptive variable names, add comments only for complex logic
 
 ## Key Features to Understand
 
-### Letter Animation System
-- Each letter (a-z) has two SVG variants: uppercase (`.up`) and lowercase (`.lo`)
-- Letters are stored in a hidden `.letter-bank` div
-- When user types, JavaScript clones the appropriate SVG and appends it to `.signature-main`
-- Animation uses CSS `stroke-dasharray` and `stroke-dashoffset` for drawing effect
-- Each letter has custom margins in CSS to ensure proper letter spacing
+**Letter Animation System**: Each letter (a-z) has two SVG variants: uppercase (`.up`) and lowercase (`.lo`). Letters are stored in a hidden `.letter-bank` div. When user types, JavaScript clones the appropriate SVG and appends it to `.signature-main`. Animation uses CSS `stroke-dasharray` and `stroke-dashoffset` for drawing effect. Each letter has custom margins in CSS to ensure proper letter spacing.
 
-### Input Handling
-- Backspace support: Clears and rebuilds the entire signature
-- Space support: Adds spacing between words
-- Modal shows/hides based on input presence
+**Input Handling**: Backspace support clears and rebuilds the entire signature. Space support adds spacing between words. Modal shows/hides based on input presence.
 
 ## Common Tasks
 
-### Adding a New Letter Style
-1. Add SVG path to both `.letter-bank .up` and `.letter-bank .lo` sections in `index.html`
-2. Add corresponding CSS margins in `style.css` (`.up.X` and `.lo.X`)
-3. Add stroke-dasharray values for animation in `style.css`
+**Adding a New Letter Style**: (1) Add SVG path to both `.letter-bank .up` and `.letter-bank .lo` sections in `index.html`, (2) Add corresponding CSS margins in `style.css` (`.up.X` and `.lo.X`), (3) Add stroke-dasharray values for animation in `style.css`
 
-### Adjusting Letter Spacing
-- Modify negative margins in the `.up.X` or `.lo.X` CSS classes in `style.css`
+**Adjusting Letter Spacing**: Modify negative margins in the `.up.X` or `.lo.X` CSS classes in `style.css`
 
-### Changing Animation Timing
-- Adjust transition duration in `.signature-main svg path` selector
-- Modify timeout values in `script.js` (currently 50ms)
+**Changing Animation Timing**: Adjust transition duration in `.signature-main svg path` selector, or modify timeout values in `script.js` (currently 50ms)
 
 ## Files You Should Not Modify Without Understanding Impact
 
