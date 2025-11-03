@@ -1,6 +1,7 @@
 # Headers for Netlify and Cloudflare Pages
-# This file allows iframe embedding from any origin
+# Security: Restricted to Adobe Portfolio domains to prevent clickjacking attacks
+# If using a custom domain, add it here: "frame-ancestors https://*.myportfolio.com https://yourdomain.com"
 # Note: CSP frame-ancestors takes precedence over X-Frame-Options
 
 /*
-  Content-Security-Policy: frame-ancestors *
+  Content-Security-Policy: frame-ancestors https://*.myportfolio.com

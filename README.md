@@ -8,7 +8,7 @@ https://ilghar.github.io/Signature-animation/
 
 ## Embedding in iFrames
 
-This site is designed to be embeddable in iframes. The HTML includes a CSP meta tag to allow iframe embedding from any origin.
+This site is designed to be embeddable in iframes on Adobe Portfolio sites. The configuration restricts embedding to `*.myportfolio.com` domains to prevent clickjacking attacks.
 
 ### Usage Example
 
@@ -31,8 +31,9 @@ This site is designed to be embeddable in iframes. The HTML includes a CSP meta 
 3. GitHub Pages sets its own default headers that cannot be modified
 
 **What we've done:**
-- Added a `<meta http-equiv="Content-Security-Policy" content="frame-ancestors *">` tag to allow iframe embedding
-- This meta tag approach has limitations as HTTP headers set by GitHub Pages take precedence over meta tags
+- Added HTTP headers via deployment configs to restrict iframe embedding to Adobe Portfolio domains (`*.myportfolio.com`)
+- This prevents clickjacking attacks while allowing legitimate embedding on Adobe Portfolio sites
+- If you use a custom domain with Adobe Portfolio, you'll need to add it to the CSP header in the deployment config files
 
 **If iframe embedding doesn't work on certain platforms:**
 
