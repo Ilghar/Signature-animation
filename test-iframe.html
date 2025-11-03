@@ -97,6 +97,9 @@
 
         <h2>Test 1: GitHub Pages URL</h2>
         <p>Testing with current GitHub Pages deployment:</p>
+        <!-- Note: allow-scripts and allow-same-origin are both required for this animation
+             to load external resources (Google Fonts, background images). While this reduces
+             sandboxing security, it's necessary for the app to function. -->
         <iframe 
             id="github-iframe"
             src="https://ilghar.github.io/Signature-animation/"
@@ -120,6 +123,9 @@
             <button onclick="checkHeaders()">Check Headers</button>
             <button onclick="clearConsole()">Clear Console</button>
         </div>
+        <!-- Note: allow-scripts and allow-same-origin are both required for this animation
+             to load external resources (Google Fonts, background images). While this reduces
+             sandboxing security, it's necessary for the app to function. -->
         <iframe 
             id="netlify-iframe"
             title="Signature animation on Netlify"
@@ -258,10 +264,15 @@ X-Frame-Options: DENY
                 if (xFrameOptions && xFrameOptions.toUpperCase() === 'DENY') {
                     log('❌ X-Frame-Options: DENY will block iframe embedding', 'error');
                 } else if (csp && csp.includes('frame-ancestors')) {
-                    if (csp.includes('frame-ancestors *') || csp.includes("frame-ancestors 'none'") === false) {
-                        log('✅ CSP frame-ancestors allows iframe embedding!', 'success');
+                    // Check for permissive frame-ancestors values
+                    if (csp.includes('frame-ancestors *')) {
+                        log('✅ CSP frame-ancestors: * allows iframe embedding from any origin!', 'success');
+                    } else if (csp.includes("frame-ancestors 'none'")) {
+                        log('❌ CSP frame-ancestors: none blocks iframe embedding', 'error');
+                    } else if (csp.includes("frame-ancestors 'self'")) {
+                        log('⚠️ CSP frame-ancestors: self allows same-origin embedding only', 'info');
                     } else {
-                        log('⚠️ CSP frame-ancestors may restrict embedding', 'info');
+                        log('⚠️ CSP frame-ancestors has specific restrictions - check value', 'info');
                     }
                 } else if (!xFrameOptions) {
                     log('✅ No restrictive headers - iframe embedding should work!', 'success');

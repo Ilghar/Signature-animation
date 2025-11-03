@@ -44,7 +44,7 @@ Unfortunately:
 
 **Answer**: ℹ️ **This is actually incorrect**
 
-- Netlify's **free tier does NOT delete sites after 90 days**
+- Netlify's **free tier does not delete sites after 90 days**
 - The 90-day deletion only applies to **inactive trial team accounts**
 - Personal free accounts keep sites indefinitely
 - No payment required for your use case
