@@ -1,0 +1,6 @@
+# Headers for Netlify and Cloudflare Pages
+# This file allows iframe embedding from any origin
+
+/*
+  X-Frame-Options: ALLOWALL
+  Content-Security-Policy: frame-ancestors *
