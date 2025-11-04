@@ -129,16 +129,6 @@ All files use modern CSP approach (not deprecated X-Frame-Options):
 - Vercel-specific configuration
 - Automatically applied on deployment
 
-### 5. Testing Tools (1 File)
-
-#### test-iframe.html (13 KB)
-- Interactive iframe embedding test page
-- Tests both GitHub Pages and alternative deployments
-- Header checking functionality
-- Debug console with detailed logging
-- Example iframe code for Adobe Portfolio
-- Troubleshooting guide
-
 ## Key Findings
 
 ### ✅ What Works
@@ -159,7 +149,7 @@ All files use modern CSP approach (not deprecated X-Frame-Options):
 1. Added CSP meta tag (helps in some browsers)
 2. Created deployment configurations for alternative platforms
 3. Documented complete migration path
-4. Provided testing tools
+4. Provided guidance for validating deployments
 
 ## Recommended Next Steps
 
@@ -211,7 +201,9 @@ All files use modern CSP approach (not deprecated X-Frame-Options):
 - ➕ `_headers`
 - ➕ `netlify.toml`
 - ➕ `vercel.json`
-- ➕ `test-iframe.html`
+
+### Removed During Cleanup
+- 🗑️ `test-iframe.html` (replaced with direct deployment testing guidance)
 
 ### Unchanged (Working Perfectly)
 - ✓ `script.js` - No changes needed
@@ -247,8 +239,7 @@ All documentation is included in the repository:
 1. Start with **SUMMARY.md** for quick answers
 2. Read **DEPLOYMENT_GUIDE.md** for step-by-step instructions
 3. Check **IFRAME_EMBEDDING_ANALYSIS.md** for technical details
-4. Use **test-iframe.html** to verify deployment
-5. Refer to **README.md** for project overview
+4. Refer to **README.md** for project overview
 
 ## Security Considerations
 
@@ -259,7 +250,7 @@ All documentation is included in the repository:
 - ⚠️ Consider restricting to specific domains in production
 
 ### Sandbox Attributes
-The test file uses `sandbox="allow-scripts allow-same-origin"`:
+Recommended iframe embeds use `sandbox="allow-scripts allow-same-origin"`:
 - Required for JavaScript functionality
 - Required for loading external resources (fonts, images)
 - Documented with security notes
