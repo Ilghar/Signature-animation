@@ -1,0 +1,4 @@
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "frame-ancestors https://portfolio.adobe.com/* https://*.myportfolio.com/* https://ilghar.studio/*"
