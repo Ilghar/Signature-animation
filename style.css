@@ -10,6 +10,7 @@
   --font-display: "Jost", sans-serif;
   --font-body: "Nunito Sans", sans-serif;
   --btn-edge: #4a3a5c;
+  --sig-scale: 2.2;
   --btn-bg: #4a3a5c;      /* plum */
   --btn-fg: #fffcfe;
   --ring: #4a3a5c;
@@ -23,9 +24,9 @@
   --text: #f4eef3;        /* ink */
   --soft: #e8a8bc;        /* accent: muted is 1.9:1 on dark canvas */
   --line: #cbbdce;        /* muted */
-  --btn-bg: #4a3a5c;      /* plum */
-  --btn-fg: #f4eef3;
-  --btn-edge: #cbbdce;
+  --btn-bg: #e8a8bc;      /* accent */
+  --btn-fg: #4a434c;      /* canvas */
+  --btn-edge: #e8a8bc;
   --stroke: #e8a8bc;
   --ring: #e8a8bc;
   --glow-a: #e8a8bc;
@@ -39,9 +40,9 @@
     --text: #f4eef3;
     --soft: #e8a8bc;
     --line: #cbbdce;
-    --btn-bg: #4a3a5c;
-    --btn-fg: #f4eef3;
-    --btn-edge: #cbbdce;
+    --btn-bg: #e8a8bc;
+    --btn-fg: #4a434c;
+    --btn-edge: #e8a8bc;
     --stroke: #e8a8bc;
     --ring: #e8a8bc;
     --glow-a: #e8a8bc;
@@ -129,7 +130,7 @@ body {
 }
 
 .modal.active {
-  height: 160px;
+  height: 240px;
   padding: 32px;
   border-radius: 48px;
 }
@@ -224,7 +225,9 @@ body {
   display: flex;
   min-height: 51px;
   flex-flow: wrap;
-  justify-content: start;
+  justify-content: center;
+  zoom: var(--sig-scale);
+  padding: 4px 0;
 }
 
 .signature-main svg path {
