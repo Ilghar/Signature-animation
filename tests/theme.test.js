@@ -26,3 +26,14 @@ test('dark theme uses only the confirmed dark palette', () => {
   const dark = block(':root[data-theme="dark"]') + css.slice(css.indexOf('@media (prefers-color-scheme: dark)'), css.indexOf('html, body'))
   for (const h of dark.match(/#[0-9a-f]{6}/gi)) assert.ok(ok.has(h.toLowerCase()), `off-palette ${h}`)
 })
+test('dark SIGN is solid #e8a8bc with canvas text; light stays plum', () => {
+  assert.match(block(':root[data-theme="dark"]'), /--btn-bg:\s*#e8a8bc/)
+  assert.match(block(':root[data-theme="dark"]'), /--btn-fg:\s*#4a434c/)
+  assert.match(block(':root'), /--btn-bg:\s*#4a3a5c/)
+})
+test('signature is scaled up and centred in its area', () => {
+  const m = block('.signature-main')
+  assert.match(m, /justify-content:\s*center/)
+  assert.match(m, /zoom:\s*var\(--sig-scale\)/)
+  assert.ok(parseFloat(block(':root').match(/--sig-scale:\s*([\d.]+)/)[1]) >= 2)
+})

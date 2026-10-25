@@ -40,3 +40,14 @@ test('script leaks no accidental globals', async () => {
   const d = load(); await d.type('ab')
   assert.equal(Object.prototype.hasOwnProperty.call(d.ctx, 'i'), false)
 })
+test('Enter triggers signing: every letter is redrawn from scratch, like SIGN', async () => {
+  const d = load(); await d.fill('Hael')
+  const before = d.sign.children ? d.sign.children[0] : null
+  await d.enter()
+  assert.equal(letters(d), 4)
+  if (before) assert.notEqual(d.sign.children[0], before)
+})
+test('Enter on an empty field does not sign', async () => {
+  const d = load(); await d.enter()
+  assert.equal(letters(d), 0)
+})
