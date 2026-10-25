@@ -22,14 +22,14 @@
   --surface: #4a434c;
   --text: #f4eef3;        /* ink */
   --soft: #e8a8bc;        /* accent: muted is 1.9:1 on dark canvas */
-  --line: #a394ae;        /* mauve */
+  --line: #cbbdce;        /* muted */
   --btn-bg: #4a3a5c;      /* plum */
   --btn-fg: #f4eef3;
-  --btn-edge: #a394ae;
+  --btn-edge: #cbbdce;
   --stroke: #e8a8bc;
   --ring: #e8a8bc;
   --glow-a: #e8a8bc;
-  --glow-b: #a394ae;
+  --glow-b: #cbbdce;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -38,14 +38,14 @@
     --surface: #4a434c;
     --text: #f4eef3;
     --soft: #e8a8bc;
-    --line: #a394ae;
+    --line: #cbbdce;
     --btn-bg: #4a3a5c;
     --btn-fg: #f4eef3;
-    --btn-edge: #a394ae;
+    --btn-edge: #cbbdce;
     --stroke: #e8a8bc;
     --ring: #e8a8bc;
     --glow-a: #e8a8bc;
-    --glow-b: #a394ae;
+    --glow-b: #cbbdce;
   }
 }
 
