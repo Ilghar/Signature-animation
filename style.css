@@ -6,6 +6,10 @@
   --text: #4a3a5c;        /* plum */
   --soft: #7a688c;        /* muted: placeholder, "signed by" */
   --line: #e4dde8;
+  --stroke: #4a3a5c;      /* plum */
+  --font-display: "Jost", sans-serif;
+  --font-body: "Nunito Sans", sans-serif;
+  --btn-edge: #4a3a5c;
   --btn-bg: #4a3a5c;      /* plum */
   --btn-fg: #fffcfe;
   --ring: #4a3a5c;
@@ -19,8 +23,10 @@
   --text: #f4eef3;        /* ink */
   --soft: #e8a8bc;        /* accent: muted is 1.9:1 on dark canvas */
   --line: #a394ae;        /* mauve */
-  --btn-bg: #f4eef3;      /* ink */
-  --btn-fg: #4a3a5c;
+  --btn-bg: #4a3a5c;      /* plum */
+  --btn-fg: #f4eef3;
+  --btn-edge: #a394ae;
+  --stroke: #e8a8bc;
   --ring: #e8a8bc;
   --glow-a: #e8a8bc;
   --glow-b: #a394ae;
@@ -33,8 +39,10 @@
     --text: #f4eef3;
     --soft: #e8a8bc;
     --line: #a394ae;
-    --btn-bg: #f4eef3;
-    --btn-fg: #4a3a5c;
+    --btn-bg: #4a3a5c;
+    --btn-fg: #f4eef3;
+    --btn-edge: #a394ae;
+    --stroke: #e8a8bc;
     --ring: #e8a8bc;
     --glow-a: #e8a8bc;
     --glow-b: #a394ae;
@@ -48,7 +56,7 @@ html, body {
 body {
   min-height: 100vh;
   color: var(--text);
-  font-family: "Nunito Sans", sans-serif;
+  font-family: var(--font-body);
   /* palette-only backdrop: canvas with soft rose/mauve glows in the lower
      corners, away from all text */
   background:
@@ -67,7 +75,7 @@ body {
 }
 .intro h1 {
   margin: 0 0 8px;
-  font-family: "Jost", sans-serif;
+  font-family: var(--font-display);
   font-weight: 400;
   font-size: 32px;
   text-transform: lowercase;
@@ -84,7 +92,7 @@ body {
   position: absolute;
   top: 16px;
   right: 16px;
-  font: 14px "Jost", sans-serif;
+  font: 14px var(--font-display);
   color: var(--text);
   background: var(--surface);
   border: 1px solid var(--line);
@@ -134,7 +142,7 @@ body {
 }
 
 .field {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: var(--font-body);
   font-optical-sizing: auto;
   font-style: normal;
   /*   font-variation-settings: "wdth" 100; */
@@ -161,7 +169,7 @@ body {
 }
 
 .sign, .signed-by {
-  font-family: "Jost", sans-serif;
+  font-family: var(--font-display);
   font-optical-sizing: auto;
   font-style: normal;
   text-transform: uppercase;
@@ -185,12 +193,11 @@ body {
   padding: 0 14px 2px 12px;
   background: var(--btn-bg);
   color: var(--btn-fg);
-  border: none;
+  border: 1px solid var(--btn-edge);
   cursor: pointer;
   transition: 0.2s;
 }
 .sign:disabled {
-  opacity: 0.35;
   cursor: not-allowed;
 }
 .sign:focus-visible {
@@ -224,7 +231,7 @@ body {
   stroke-linejoin: round;
   stroke-linecap: round;
   stroke-width: 1;
-  stroke: var(--text);
+  stroke: var(--stroke);
   transition: 0.2s stroke-dashoffset;
 }
 
@@ -607,7 +614,7 @@ body {
 .signature-main .fallback {
   align-self: center;
   padding: 0 1px;
-  font-family: "Jost", sans-serif;
+  font-family: var(--font-display);
   font-size: 22px;
   line-height: 51px;
   color: var(--text);
