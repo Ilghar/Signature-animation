@@ -10,6 +10,12 @@ Accented letters are split into base letter plus mark: the base glyph is drawn a
 
 The page uses the ilghar.studio palette in light and dark mode. It follows the system setting, and the toggle in the corner switches it manually (the choice is remembered).
 
+## Run locally
+
+```
+python3 -m http.server 8000   # then open http://localhost:8000
+```
+
 ## Tests
 
 ```
@@ -49,5 +55,6 @@ GitHub Pages can't send custom HTTP headers. `index.html` carries a `frame-ances
 - `style.css`: palette, light/dark themes and the stroke animation
 - `script.js`: input handling and drawing
 - `tests/`: Node test runner tests against a small fake DOM
+- `docs/`: deployment, embedding, security and change notes
 
 Credit: ilghar.studio
