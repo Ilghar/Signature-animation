@@ -1,0 +1,43 @@
+'use strict'
+const test = require('node:test')
+const assert = require('node:assert/strict')
+const { load } = require('./fakedom')
+
+const isLetter = (u) => u.classList.contains('up') || u.classList.contains('lo')
+const accentOf = (u) => { const a = u.querySelector('.accent'); return a && a.getAttribute('data-accent') }
+
+test("'Hāèl' signs fully: base letters plus macron and grave strokes", async () => {
+  const d = load(); await d.type('Hāèl')
+  const u = d.units()
+  assert.equal(u.length, 4)
+  assert.ok(u.every(isLetter))
+  assert.deepEqual(u.map((x) => [...x.classList.s].find((c) => c.length === 1)), ['h', 'a', 'e', 'l'])
+  assert.equal(accentOf(u[1]), 'macron')
+  assert.equal(accentOf(u[2]), 'grave')
+  assert.equal(accentOf(u[0]), null)
+})
+test('accent strokes animate in like the letter', async () => {
+  const d = load(); await d.fill('ā')
+  const p = d.units()[0].querySelector('.accent').querySelector('path')
+  assert.equal(p.style.strokeDashoffset, '0')
+})
+test('decomposed input (a + U+0304) is treated the same as precomposed ā', async () => {
+  const d = load(); await d.paste('Ha\u0304e\u0300l')
+  assert.equal(d.units().length, 4)
+  assert.equal(accentOf(d.units()[1]), 'macron')
+})
+test('uppercase accented letters keep case and accent', async () => {
+  const d = load(); await d.fill('ÈÁ')
+  const u = d.units()
+  assert.ok(u[0].classList.contains('up') && u[0].classList.contains('e'))
+  assert.equal(accentOf(u[0]), 'grave'); assert.equal(accentOf(u[1]), 'acute')
+})
+test('characters with no glyph fall back visibly instead of vanishing', async () => {
+  const d = load(); await d.fill('Zoë 2ß')
+  const u = d.units()
+  assert.equal(u.length, 6)
+  assert.equal(accentOf(u[2]), 'diaeresis')
+  assert.equal(u[4].getAttribute('data-char'), '2'); assert.equal(u[4].textContent, '2')
+  assert.equal(u[5].getAttribute('data-char'), 'ß')
+  assert.ok(u[4].classList.contains('fallback'))
+})
