@@ -22,7 +22,7 @@ python3 -m http.server 8000   # then open http://localhost:8000
 node --test tests/
 ```
 
-Uses only Node's built-in test runner (Node 18+); there are no dependencies. The tests run the real `script.js` against the real letter bank, covering typing, paste, fill, Enter, the Sign button, accents and fallbacks.
+23 tests as of commit 0bc66c4 (19 as of 88be5c2). Uses only Node's built-in test runner (Node 18+); there are no dependencies. The tests run the real `script.js` against the real letter bank, covering typing, paste, fill, Enter, the Sign button, accents and fallbacks.
 
 ## Live demo
 
