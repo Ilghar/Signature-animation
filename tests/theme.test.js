@@ -21,3 +21,8 @@ test('SIGN is solid plum in light and never looks washed out when disabled', () 
   assert.match(block(':root'), /--btn-bg:\s*#4a3a5c/)
   assert.doesNotMatch(block('.sign:disabled'), /opacity/)
 })
+test('dark theme uses only the confirmed dark palette', () => {
+  const ok = new Set(['#4a434c', '#5a535c', '#cbbdce', '#f4eef3', '#e8a8bc', '#4a3a5c'])
+  const dark = block(':root[data-theme="dark"]') + css.slice(css.indexOf('@media (prefers-color-scheme: dark)'), css.indexOf('html, body'))
+  for (const h of dark.match(/#[0-9a-f]{6}/gi)) assert.ok(ok.has(h.toLowerCase()), `off-palette ${h}`)
+})
