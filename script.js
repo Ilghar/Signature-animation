@@ -5,27 +5,34 @@ const lowercase = document.querySelectorAll('.letter-bank .lo')
 const signedBy = document.querySelector('.signed-by')
 const modal = document.querySelector('.modal')
 
-name.addEventListener("keydown", (event) => {
-  if ((event.code === `Key${event.key.toUpperCase()}`) || (event.code == 'Space')) {
-    var key = event.key   	
-    draw(key,true)
-  } else if (event.code == 'Backspace') {
-    setTimeout(function() {     
-      var value = name.value
-      sign.innerHTML = ''
-      var letters = value.split('')
-      letters.forEach((item, i) => {
-        draw(item,false)
-      })
-    }, 50);
+const signBtn = document.querySelector('.sign')
+let prev = ''
+
+// Render from the field's value, not from keystrokes: works for paste,
+// autofill, mobile IMEs, non-QWERTY layouts and scripted input.
+function render(value, animateFrom) {
+  sign.innerHTML = ''
+  value.split('').forEach((ch, i) => draw(ch, i >= animateFrom))
+}
+
+function update() {
+  const v = name.value
+  const common = v.startsWith(prev) ? prev.length : 0 // animate only new chars
+  render(v, common)
+  prev = v
+  modal.classList.toggle('active', v.length > 0)
+  signBtn.disabled = v.trim().length === 0
+}
+
+name.addEventListener('input', update)
+signBtn.addEventListener('click', () => {
+  if (!signBtn.disabled) render(name.value, 0)
+})
+name.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.isComposing) {
+    e.preventDefault()
+    signBtn.click()
   }
-  setTimeout(function() {  
-    if (!name.value) {
-      modal.classList.remove('active')
-    } else {
-      modal.classList.add('active')
-    }
-  }, 50);
 })
 
 function draw(key,animate) {
@@ -36,7 +43,7 @@ function draw(key,animate) {
   } else {
     const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i));
 
-    for (i = 0; i < alphabet.length; i++) {
+    for (let i = 0; i < alphabet.length; i++) {
       var item = alphabet[i]
 
       if (key.toLowerCase() == item) {
@@ -61,3 +68,5 @@ function draw(key,animate) {
     }
   }
 }
+
+update()

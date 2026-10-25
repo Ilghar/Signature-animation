@@ -95,11 +95,16 @@ body {
   background: #000;
   color: #fff;
   border: none;
-  opacity: 0.2;
+  cursor: pointer;
   transition: 0.2s;
 }
-.active .sign {
-  opacity: 1;
+.sign:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.sign:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
 }
 
 .signature {
