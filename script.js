@@ -8,16 +8,22 @@ const modal = document.querySelector('.modal')
 const signBtn = document.querySelector('.sign')
 let prev = ''
 
+// Split into user-perceived units: a base character plus any combining
+// marks, so 'ā' (precomposed or a + U+0304) is one unit.
+function units(value) {
+  return value.normalize('NFD').match(/\P{M}\p{M}*/gu) || []
+}
+
 // Render from the field's value, not from keystrokes: works for paste,
 // autofill, mobile IMEs, non-QWERTY layouts and scripted input.
 function render(value, animateFrom) {
   sign.innerHTML = ''
-  value.split('').forEach((ch, i) => draw(ch, i >= animateFrom))
+  units(value).forEach((u, i) => draw(u, i >= animateFrom))
 }
 
 function update() {
   const v = name.value
-  const common = v.startsWith(prev) ? prev.length : 0 // animate only new chars
+  const common = v.startsWith(prev) ? units(prev).length : 0 // animate only new chars
   render(v, common)
   prev = v
   modal.classList.toggle('active', v.length > 0)
@@ -35,38 +41,76 @@ name.addEventListener('keydown', (e) => {
   }
 })
 
-function draw(key,animate) {
-  if (key == " ") {
-    const space = document.createElement("div");
-    space.style.minWidth = '12px'   
-    sign.appendChild(space)   
-  } else {
-    const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i));
+// Accent strokes drawn over the base glyph, in a 10x51 box matching the
+// letter viewBox height. Two paths for the diaeresis.
+const ACCENTS = {
+  '\u0304': ['macron', ['M1 17.5 L9 16.5']],
+  '\u0300': ['grave', ['M2.5 13 L7 18']],
+  '\u0301': ['acute', ['M3 18 L7.5 13']],
+  '\u0302': ['circumflex', ['M1.5 18 L5 14 L8.5 18']],
+  '\u0308': ['diaeresis', ['M2.5 16.5 L3 16.6', 'M7 16.5 L7.5 16.6']],
+  '\u0303': ['tilde', ['M1 17.5 Q3 14.5 5 16.5 T9 15.5']],
+}
+const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
 
-    for (let i = 0; i < alphabet.length; i++) {
-      var item = alphabet[i]
+function strokeIn(path, length, animate) {
+  path.style.strokeDasharray = String(length)
+  path.style.strokeDashoffset = String(length)
+  const done = () => { path.style.strokeDashoffset = '0' }
+  if (animate) setTimeout(done, 250) // after the base letter has started
+  else done()
+}
 
-      if (key.toLowerCase() == item) {
-        const letter = document.createElement("div");  
-        if (key == item.toUpperCase()) {
-          letter.innerHTML = uppercase[i].innerHTML
-          letter.classList.add('up')
-        } else {
-          letter.innerHTML = lowercase[i].innerHTML
-          letter.classList.add('lo')
-        }
-        letter.classList.add(item)
-        if (animate) {
-          setTimeout(function() { 
-            letter.querySelector('svg path').style.strokeDashoffset = '0'
-          }, 50);
-        } else {
-          letter.querySelector('svg path').style.strokeDashoffset = '0'
-        }
-        sign.appendChild(letter)
-      }
-    }
+function addAccent(letter, mark, upper, animate) {
+  const [kind, paths] = ACCENTS[mark]
+  const acc = document.createElement('span')
+  acc.classList.add('accent')
+  acc.setAttribute('data-accent', kind)
+  acc.setAttribute('aria-hidden', 'true')
+  // uppercase glyphs reach the top of the box, so lift the accent clear
+  const y = upper ? -14 : 0
+  acc.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 ' + y +
+    ' 10 51" width="10" height="51">' + paths.map((d) => '<path d="' + d + '"></path>').join('') + '</svg>'
+  acc.querySelectorAll('path').forEach((p) => strokeIn(p, 12, animate))
+  letter.appendChild(acc)
+}
+
+function fallback(unit) {
+  const el = document.createElement('span')
+  el.classList.add('fallback')
+  el.setAttribute('data-char', unit)
+  el.textContent = unit
+  sign.appendChild(el)
+}
+
+function draw(unit, animate) {
+  if (/^\s$/.test(unit)) {
+    const space = document.createElement('div')
+    space.style.minWidth = '12px'
+    sign.appendChild(space)
+    return
   }
+  const base = unit[0]
+  const marks = unit.slice(1).split('')
+  const i = ALPHABET.indexOf(base.toLowerCase())
+  // no glyph for this base, or a mark we cannot draw: show the character
+  // itself in the UI font rather than silently dropping it
+  if (i < 0 || !marks.every((m) => m in ACCENTS)) {
+    fallback(unit.normalize('NFC'))
+    return
+  }
+  const upper = base !== base.toLowerCase()
+  const letter = document.createElement('div')
+  letter.innerHTML = (upper ? uppercase : lowercase)[i].innerHTML
+  letter.classList.add(upper ? 'up' : 'lo', ALPHABET[i])
+  const path = letter.querySelector('svg path')
+  if (animate) {
+    setTimeout(function () { path.style.strokeDashoffset = '0' }, 50)
+  } else {
+    path.style.strokeDashoffset = '0'
+  }
+  marks.forEach((m) => addAccent(letter, m, upper, animate))
+  sign.appendChild(letter)
 }
 
 update()

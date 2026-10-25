@@ -500,3 +500,23 @@ body {
   stroke-dasharray: 67;
   stroke-dashoffset: 67;
 }
+
+/* accents drawn over a base glyph (ā, è, ...) */
+.signature-main .up, .signature-main .lo {
+  position: relative;
+}
+.signature-main .accent {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+/* characters with no drawn glyph: shown in the UI font, never dropped */
+.signature-main .fallback {
+  align-self: center;
+  padding: 0 1px;
+  font-family: "Jost", sans-serif;
+  font-size: 22px;
+  line-height: 51px;
+}

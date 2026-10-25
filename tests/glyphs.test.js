@@ -17,7 +17,7 @@ test("'Hāèl' signs fully: base letters plus macron and grave strokes", async (
   assert.equal(accentOf(u[0]), null)
 })
 test('accent strokes animate in like the letter', async () => {
-  const d = load(); await d.fill('ā')
+  const d = load(); await d.fill('ā'); await d.wait(300)
   const p = d.units()[0].querySelector('.accent').querySelector('path')
   assert.equal(p.style.strokeDashoffset, '0')
 })
