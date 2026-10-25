@@ -2,6 +2,22 @@
 
 An interactive signature animation tool that renders handwritten signatures from text input.
 
+## How it works
+
+Each letter a–z (upper and lower case) is a hand-drawn SVG path in the hidden letter bank in `index.html`. `script.js` re-renders the signature from the field's value on every `input` event, so typing, paste, autofill and mobile input all draw; only newly added characters animate (via `stroke-dashoffset`). **Sign** (or Enter) redraws the whole name, and stays disabled while the field is empty.
+
+Accented letters are split into base letter plus mark: the base glyph is drawn and a separate accent stroke is added on top (macron, grave, acute, circumflex, diaeresis, tilde), so names like "Hāèl" sign in full. Characters without a drawn glyph (digits, ß, other scripts) are shown as plain text in Jost rather than dropped.
+
+The page uses the ilghar.studio palette in light and dark mode. It follows the system setting, and the toggle in the corner switches it manually (the choice is remembered).
+
+## Tests
+
+```
+node --test tests/
+```
+
+Uses only Node's built-in test runner (Node 18+); there are no dependencies. The tests run the real `script.js` against the real letter bank, covering typing, paste, fill, Enter, the Sign button, accents and fallbacks.
+
 ## Live Demo
 
 https://ilghar.github.io/Signature-animation/

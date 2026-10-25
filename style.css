@@ -1,12 +1,101 @@
-body {
-  background: url('https://img.freepik.com/premium-photo/abstract-blurred-sky-colorful_40299-22.jpg') no-repeat center center fixed;
--webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+/* ilghar.studio palette: light + dark, system default, manual toggle */
+:root {
+  color-scheme: light;
+  --canvas: #f3f1f6;
+  --surface: #fffcfe;
+  --text: #4a3a5c;        /* plum */
+  --soft: #7a688c;        /* muted: placeholder, "signed by" */
+  --line: #e4dde8;
+  --btn-bg: #4a3a5c;      /* plum */
+  --btn-fg: #fffcfe;
+  --ring: #4a3a5c;
+  --glow-a: #c97a98;      /* rose */
+  --glow-b: #a394ae;      /* mauve */
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: #4a434c;
+  --surface: #4a434c;
+  --text: #f4eef3;        /* ink */
+  --soft: #e8a8bc;        /* accent: muted is 1.9:1 on dark canvas */
+  --line: #a394ae;        /* mauve */
+  --btn-bg: #f4eef3;      /* ink */
+  --btn-fg: #4a3a5c;
+  --ring: #e8a8bc;
+  --glow-a: #e8a8bc;
+  --glow-b: #a394ae;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --canvas: #4a434c;
+    --surface: #4a434c;
+    --text: #f4eef3;
+    --soft: #e8a8bc;
+    --line: #a394ae;
+    --btn-bg: #f4eef3;
+    --btn-fg: #4a3a5c;
+    --ring: #e8a8bc;
+    --glow-a: #e8a8bc;
+    --glow-b: #a394ae;
+  }
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+html, body {
+  margin: 0;
+  min-height: 100%;
+}
+body {
+  min-height: 100vh;
+  color: var(--text);
+  font-family: "Nunito Sans", sans-serif;
+  /* palette-only backdrop: canvas with soft rose/mauve glows in the lower
+     corners, away from all text */
+  background:
+    radial-gradient(40vmax 30vmax at 0% 100%, color-mix(in srgb, var(--glow-a) 28%, transparent), transparent 70%),
+    radial-gradient(40vmax 30vmax at 100% 100%, color-mix(in srgb, var(--glow-b) 32%, transparent), transparent 70%),
+    var(--canvas);
+}
+
+.intro {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(380px, calc(100% - 48px));
+  text-align: center;
+}
+.intro h1 {
+  margin: 0 0 8px;
+  font-family: "Jost", sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  text-transform: lowercase;
+  color: var(--text);
+}
+.intro p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font: 14px "Jost", sans-serif;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
 
 .modal {
   position: absolute;
@@ -22,12 +111,13 @@ body {
   padding: 24px;
   border-radius: 40px;
   overflow: hidden;
-  background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 100%);
-  box-shadow: 0 0 16px 0 rgba(0,0,0,0);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 0 16px 0 rgba(74,58,92,0);
   transition: 0.4s ease height, 0.4s ease padding, 0.2s border-radius, 0.6s ease box-shadow;
 }
 .modal:hover {
-  box-shadow: 0 24px 48px -24px rgba(0,0,0,0.025);
+  box-shadow: 0 24px 48px -24px rgba(74,58,92,0.08);
 }
 
 .modal.active {
@@ -44,7 +134,7 @@ body {
 }
 
 .field {
-  font-family: "Instrument Sans", sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
   /*   font-variation-settings: "wdth" 100; */
@@ -53,24 +143,25 @@ body {
   align-items: center;
   min-height: 48px;
   border-radius: 16px;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid var(--line);
   padding: 0 12px 2px 12px;
-  background: none;
-  color: #000;
+  background: var(--surface);
+  color: var(--text);
   outline: none;
   transition: border 0.2s;
 }
-.active .field {
-  border: 1px solid rgba(0,0,0,0.5);
+.field:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
 }
 
 .field::placeholder {
-  opacity: 0.5;
-  color: #000;
+  opacity: 1;
+  color: var(--soft);
 }
 
 .sign, .signed-by {
-  font-family: "JetBrains Mono", monospace;
+  font-family: "Jost", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
   text-transform: uppercase;
@@ -92,8 +183,8 @@ body {
   height: 44px;
   border-radius: 12px;
   padding: 0 14px 2px 12px;
-  background: #000;
-  color: #fff;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
   border: none;
   cursor: pointer;
   transition: 0.2s;
@@ -103,12 +194,12 @@ body {
   cursor: not-allowed;
 }
 .sign:focus-visible {
-  outline: 2px solid currentColor;
+  outline: 2px solid var(--ring);
   outline-offset: 2px;
 }
 
 .signature {
-  border-bottom: 1px solid rgba(0,0,0,0.25)
+  border-bottom: 1px solid var(--line)
 }
 
 .letter-bank {
@@ -116,7 +207,7 @@ body {
 }
 
 .signed-by {
-  color: rgba(0,0,0,0.5);
+  color: var(--soft);
   opacity: 0;
   padding-bottom: 2px;
   transition: 0.2s ease;
@@ -133,7 +224,7 @@ body {
   stroke-linejoin: round;
   stroke-linecap: round;
   stroke-width: 1;
-  stroke: #000;
+  stroke: var(--text);
   transition: 0.2s stroke-dashoffset;
 }
 
@@ -519,4 +610,5 @@ body {
   font-family: "Jost", sans-serif;
   font-size: 22px;
   line-height: 51px;
+  color: var(--text);
 }

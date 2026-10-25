@@ -41,3 +41,18 @@ test('characters with no glyph fall back visibly instead of vanishing', async ()
   assert.equal(u[5].getAttribute('data-char'), 'ß')
   assert.ok(u[4].classList.contains('fallback'))
 })
+
+test('page title is lowercase and fonts/colours stay on the studio palette', () => {
+  const fs = require('node:fs'); const path = require('node:path')
+  const root = path.join(__dirname, '..')
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8')
+  const css = fs.readFileSync(path.join(root, 'style.css'), 'utf8')
+  const h1 = html.match(/<h1>([^<]*)<\/h1>/)[1]
+  assert.equal(h1, h1.toLowerCase())
+  assert.match(html, /family=Jost/); assert.match(html, /Nunito\+Sans/)
+  assert.doesNotMatch(html + css, /Instrument|JetBrains|freepik/)
+  const allowed = new Set(['#f3f1f6', '#fffcfe', '#4a3a5c', '#c97a98', '#a394ae', '#7a688c', '#e4dde8', '#4a434c', '#f4eef3', '#e8a8bc'])
+  const used = (css.match(/#[0-9a-fA-F]{6}\b/g) || []).map((x) => x.toLowerCase())
+  assert.deepEqual(used.filter((c) => !allowed.has(c)), [])
+  assert.doesNotMatch(css, /rgba?\(\s*0\s*,\s*0\s*,\s*0/)
+})

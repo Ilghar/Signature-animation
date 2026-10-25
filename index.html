@@ -4,22 +4,31 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signature animation</title>
+    <title>signature animation · ilghar.studio</title>
     <!-- Allow embedding in Adobe Portfolio and custom domain iframes (HTTP headers take precedence) -->
     <meta http-equiv="Content-Security-Policy" content="frame-ancestors https://portfolio.adobe.com/* https://*.myportfolio.com/* https://ilghar.studio/*">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet"><link rel="stylesheet" href="./style.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="./style.css">
 
+    <script>
+      // apply a saved manual theme before first paint; otherwise follow the system
+      try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t) } catch (e) {}
+    </script>
   </head>
     
   <body>
+  <button class="theme-toggle" type="button" aria-pressed="false">dark mode</button>
+  <header class="intro">
+    <h1>signature animation</h1>
+    <p>Type your name and it is drawn stroke by stroke as a handwritten signature.</p>
+  </header>
   <div class="modal">
   <div class="field-wrapper">
-    <input autocomplete="off" name="hidden" class="field" maxlength="256" placeholder="Your name" type="text" id="First-name" required="">
+    <input autocomplete="off" name="hidden" class="field" maxlength="256" placeholder="Your name" aria-label="Your name" type="text" id="First-name" required="">
     <button class="sign" type="button" disabled>
       <svg width="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M7.72421 4.666H5.13421C4.86052 4.66592 4.59342 4.75007 4.3692 4.90703C4.14498 5.06398 3.97449 5.28614 3.88088 5.54333L1.37421 12.438C1.28555 12.6813 1.34621 12.954 1.52888 13.1373L1.72421 13.3327L6.00555 9.05133C6.00488 9.034 6.00022 9.01667 6.00022 8.99933C6.00022 8.80155 6.05886 8.60821 6.16875 8.44376C6.27863 8.27932 6.43481 8.15114 6.61753 8.07546C6.80026 7.99977 7.00132 7.97996 7.19531 8.01855C7.38929 8.05713 7.56747 8.15238 7.70732 8.29223C7.84717 8.43208 7.94241 8.61026 7.981 8.80424C8.01959 8.99823 7.99978 9.19929 7.92409 9.38202C7.84841 9.56474 7.72023 9.72092 7.55579 9.8308C7.39134 9.94069 7.198 9.99933 7.00022 9.99933C6.98288 9.99933 6.96555 9.99467 6.94822 9.994L2.66688 14.2753L2.86221 14.4707C2.95185 14.5605 3.06534 14.6228 3.18927 14.6503C3.31319 14.6777 3.44238 14.669 3.56155 14.6253L10.4562 12.118C10.7134 12.0244 10.9356 11.8539 11.0925 11.6297C11.2495 11.4055 11.3336 11.1384 11.3335 10.8647V8.27467L12.6662 6.94267L9.05688 3.33333L7.72421 4.666ZM13.2929 6.04067L9.95955 2.70733L11.3729 1.29333L14.7062 4.62667L13.2929 6.04067Z" fill="white"/>
+        <path d="M7.72421 4.666H5.13421C4.86052 4.66592 4.59342 4.75007 4.3692 4.90703C4.14498 5.06398 3.97449 5.28614 3.88088 5.54333L1.37421 12.438C1.28555 12.6813 1.34621 12.954 1.52888 13.1373L1.72421 13.3327L6.00555 9.05133C6.00488 9.034 6.00022 9.01667 6.00022 8.99933C6.00022 8.80155 6.05886 8.60821 6.16875 8.44376C6.27863 8.27932 6.43481 8.15114 6.61753 8.07546C6.80026 7.99977 7.00132 7.97996 7.19531 8.01855C7.38929 8.05713 7.56747 8.15238 7.70732 8.29223C7.84717 8.43208 7.94241 8.61026 7.981 8.80424C8.01959 8.99823 7.99978 9.19929 7.92409 9.38202C7.84841 9.56474 7.72023 9.72092 7.55579 9.8308C7.39134 9.94069 7.198 9.99933 7.00022 9.99933C6.98288 9.99933 6.96555 9.99467 6.94822 9.994L2.66688 14.2753L2.86221 14.4707C2.95185 14.5605 3.06534 14.6228 3.18927 14.6503C3.31319 14.6777 3.44238 14.669 3.56155 14.6253L10.4562 12.118C10.7134 12.0244 10.9356 11.8539 11.0925 11.6297C11.2495 11.4055 11.3336 11.1384 11.3335 10.8647V8.27467L12.6662 6.94267L9.05688 3.33333L7.72421 4.666ZM13.2929 6.04067L9.95955 2.70733L11.3729 1.29333L14.7062 4.62667L13.2929 6.04067Z" fill="currentColor"/>
       </svg>
       Sign
     </button>

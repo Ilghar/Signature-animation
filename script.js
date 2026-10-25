@@ -114,3 +114,25 @@ function draw(unit, animate) {
 }
 
 update()
+
+// Light/dark: follow the system until the visitor picks one; the button
+// always names the mode it switches to.
+const toggle = document.querySelector('.theme-toggle')
+if (toggle && document.documentElement) {
+  const root = document.documentElement
+  const mq = typeof matchMedia === 'function' ? matchMedia('(prefers-color-scheme: dark)') : null
+  const current = () => root.getAttribute('data-theme') || (mq && mq.matches ? 'dark' : 'light')
+  const label = () => {
+    const dark = current() === 'dark'
+    toggle.textContent = dark ? 'light mode' : 'dark mode'
+    toggle.setAttribute('aria-pressed', String(dark))
+  }
+  toggle.addEventListener('click', () => {
+    const next = current() === 'dark' ? 'light' : 'dark'
+    root.setAttribute('data-theme', next)
+    try { localStorage.setItem('theme', next) } catch (e) {}
+    label()
+  })
+  if (mq && mq.addEventListener) mq.addEventListener('change', label)
+  label()
+}
