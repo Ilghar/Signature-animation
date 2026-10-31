@@ -123,14 +123,17 @@ body {
   background: var(--surface);
   border: 1px solid var(--line);
   box-shadow: 0 0 16px 0 rgba(74,58,92,0);
-  transition: 0.4s ease height, 0.4s ease padding, 0.2s border-radius, 0.6s ease box-shadow;
+  interpolate-size: allow-keywords;
+  transition: 0.4s ease height, 0.4s ease min-height, 0.4s ease padding, 0.2s border-radius, 0.6s ease box-shadow;
 }
 .modal:hover {
   box-shadow: 0 24px 48px -24px rgba(74,58,92,0.08);
 }
 
 .modal.active {
-  height: 240px;
+  /* grows when a long name wraps to a second row at --sig-scale */
+  height: auto;
+  min-height: 240px;
   padding: 32px;
   border-radius: 48px;
 }
