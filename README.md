@@ -1,6 +1,7 @@
 # Signature Animation
+Live demo: https://ilghar.github.io/Signature-animation/
 
-An interactive signature animation tool that renders handwritten signatures from text input.
+Type a name and watch it signed in hand-drawn letters.
 
 ## How it works
 
@@ -22,11 +23,7 @@ python3 -m http.server 8000   # then open http://localhost:8000
 node --test tests/
 ```
 
-23 tests as of commit 0bc66c4 (19 as of 88be5c2). Uses only Node's built-in test runner (Node 18+); there are no dependencies. The tests run the real `script.js` against the real letter bank, covering typing, paste, fill, Enter, the Sign button, accents and fallbacks.
-
-## Live demo
-
-https://ilghar.github.io/Signature-animation/
+23 tests as of commit 0bc66c4. Uses only Node's built-in test runner (Node 18+); there are no dependencies. The tests run the real `script.js` against the real letter bank, covering typing, paste, fill, Enter, the Sign button, accents and fallbacks.
 
 ## Embedding
 
