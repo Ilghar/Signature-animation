@@ -67,8 +67,9 @@ function addAccent(letter, mark, upper, animate) {
   acc.classList.add('accent')
   acc.setAttribute('data-accent', kind)
   acc.setAttribute('aria-hidden', 'true')
-  // uppercase glyphs reach the top of the box, so lift the accent clear
-  const y = upper ? -14 : 0
+  // uppercase glyphs reach the top of the box, so lift the accent clear:
+  // a positive viewBox min-y moves the strokes (y 13-18) up to y 1-6
+  const y = upper ? 12 : 0
   acc.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 ' + y +
     ' 10 51" width="10" height="51">' + paths.map((d) => '<path d="' + d + '"></path>').join('') + '</svg>'
   acc.querySelectorAll('path').forEach((p) => strokeIn(p, 12, animate))

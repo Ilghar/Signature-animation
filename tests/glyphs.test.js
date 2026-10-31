@@ -56,3 +56,11 @@ test('page title is lowercase and fonts/colours stay on the studio palette', () 
   assert.deepEqual(used.filter((c) => !allowed.has(c)), [])
   assert.doesNotMatch(css, /rgba?\(\s*0\s*,\s*0\s*,\s*0/)
 })
+test('uppercase accents are lifted above the letter, not pushed down into it', async () => {
+  const d = load(); await d.fill('Èè')
+  const minY = (u) => Number(/viewBox="0 (-?[\d.]+) /.exec(u.querySelector('.accent').innerHTML)[1])
+  const [up, lo] = d.units()
+  // content renders at y - minY, so a positive minY moves the strokes up
+  assert.equal(minY(lo), 0)
+  assert.ok(minY(up) > 0, 'viewBox min-y ' + minY(up) + ' drops the accent')
+})
