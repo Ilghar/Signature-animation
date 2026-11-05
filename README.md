@@ -11,7 +11,7 @@
 <p align="center"><b><a href="https://ilghar.github.io/Signature-animation/">OPEN THE LIVE APP</a></b> | <a href="#how-it-works">HOW IT WORKS</a></p>
 
 <!-- Function previews: one per app function, GIF/SVG, each linking into the live app -->
-| <picture><source media="(prefers-color-scheme: dark)" srcset="docs/hero/f1-dark.gif"><img src="docs/hero/f1-light.gif" width="100%" alt="The name field with letters starting to draw as SVG strokes."></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="docs/hero/f2-dark.gif"><img src="docs/hero/f2-light.gif" width="100%" alt="The finished signature after Sign, with every stroke drawn."></picture> |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="docs/hero/f1-dark.webp"><source media="(prefers-color-scheme: light)" srcset="docs/hero/f1-light.webp"><img src="docs/hero/f1-light.gif" width="100%" alt="The name field with letters starting to draw as SVG strokes."></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="docs/hero/f2-dark.webp"><source media="(prefers-color-scheme: light)" srcset="docs/hero/f2-light.webp"><img src="docs/hero/f2-light.gif" width="100%" alt="The finished signature after Sign, with every stroke drawn."></picture> |
 |---|---|
 
 ## How it works
