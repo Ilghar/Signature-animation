@@ -510,3 +510,11 @@ body{background:var(--canvas);color:var(--ink);font-family:var(--font-sans)}
 .theme-toggle{position:fixed;top:16px;right:16px;z-index:20;font:inherit;padding:8px 16px;border-radius:0;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
 .theme-toggle:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
 .ilg-credit{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:2rem}
+
+/* theme-toggle is a direct child of .frame.r1610; pages-shell sizes frame>* to 100%.
+   Keep the fixed corner control auto-sized so it does not cover the page. */
+.frame > .theme-toggle,
+#theme-toggle{
+  width:auto!important;height:auto!important;left:auto;bottom:auto;inset:auto;
+  top:16px;right:16px;object-fit:unset;max-width:none;
+}
