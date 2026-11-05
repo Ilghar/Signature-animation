@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signature animation</title>
-    <!-- Allow embedding in Adobe Portfolio and custom domain iframes (HTTP headers take precedence) -->
-    <meta http-equiv="Content-Security-Policy" content="frame-ancestors https://portfolio.adobe.com/* https://*.myportfolio.com/* https://ilghar.studio/*">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>Signature animation — ilghar.studio</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors https://portfolio.adobe.com/* https://*.myportfolio.com/* https://ilghar.studio/*">
+<script>(function(){try{var m=localStorage.getItem("ilghar-theme");}catch(e){}var d=m?m==="dark":matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.classList.add(d?"dark":"light");})();</script>
+<link rel="stylesheet" href="./tokens.css">
+<link rel="stylesheet" href="./pages-shell.css">
 <link rel="stylesheet" href="./style.css">
-
-  </head>
-    
-  <body>
-  <div class="modal">
+</head>
+<body>
+<button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Dark mode</button>
+<div class="ilg-page">
+<p class="ilg-kicker">ilghar.studio · case</p>
+<h1><span class="initial">S</span>ignature animation</h1>
+<p class="lede">Type a name. Watch each letter draw itself. The live app is the page — try it above the fold.</p>
+<div class="ilg-app-stage" id="app-stage">
+<div class="modal">
   <div class="field-wrapper">
     <input autocomplete="off" name="hidden" class="field" maxlength="256" placeholder="Your name" type="text" id="First-name" required="">
     <button class="sign">
@@ -291,7 +297,13 @@
   </div>
 </div>
     <script  src="./script.js"></script>
-
-  </body>
-  
+</div>
+<p class="ilg-credit">ilghar.studio</p>
+</div>
+<script>
+(function(){var b=document.getElementById("theme-toggle"),r=document.documentElement;
+function sync(){var d=r.classList.contains("dark");b.setAttribute("aria-pressed",String(d));b.textContent=d?"Light mode":"Dark mode";b.setAttribute("aria-label",d?"Switch to light mode":"Switch to dark mode");}
+b.addEventListener("click",function(){var d=!r.classList.contains("dark");r.classList.toggle("dark",d);r.classList.toggle("light",!d);try{localStorage.setItem("ilghar-theme",d?"dark":"light");}catch(e){}sync();});sync();})();
+</script>
+</body>
 </html>
