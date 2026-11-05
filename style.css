@@ -1,4 +1,4 @@
-@font-face{font-family:"Jost";font-style:normal;font-weight:300;font-display:swap;src:url("fonts/jost-latin-ext-300-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:"Jost";font-style:normal;font-weight:300;font-display:swap;src:url("fonts/jost-latin-300-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:"Jost";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/jost-latin-ext-400-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:"Jost";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/jost-latin-400-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:"Jost";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/jost-latin-ext-500-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:"Jost";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/jost-latin-500-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:"Jost";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/jost-latin-ext-600-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:"Jost";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/jost-latin-600-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:"Jost";font-style:italic;font-weight:400;font-display:swap;src:url("fonts/jost-latin-ext-400-italic.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:"Jost";font-style:italic;font-weight:400;font-display:swap;src:url("fonts/jost-latin-400-italic.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:100 900;font-display:swap;src:url("fonts/vazirmatn-fa.woff2") format("woff2");unicode-range:U+0600-06FF,U+200C-200D,U+FB50-FDFF,U+FE70-FEFF;}
+@font-face{font-family:Jost;font-style:normal;font-weight:300;font-display:swap;src:url("fonts/jost-latin-ext-300-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:Jost;font-style:normal;font-weight:300;font-display:swap;src:url("fonts/jost-latin-300-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:Jost;font-style:normal;font-weight:400;font-display:swap;src:url("fonts/jost-latin-ext-400-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:Jost;font-style:normal;font-weight:400;font-display:swap;src:url("fonts/jost-latin-400-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:Jost;font-style:normal;font-weight:500;font-display:swap;src:url("fonts/jost-latin-ext-500-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:Jost;font-style:normal;font-weight:500;font-display:swap;src:url("fonts/jost-latin-500-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:Jost;font-style:normal;font-weight:600;font-display:swap;src:url("fonts/jost-latin-ext-600-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:Jost;font-style:normal;font-weight:600;font-display:swap;src:url("fonts/jost-latin-600-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:Jost;font-style:italic;font-weight:400;font-display:swap;src:url("fonts/jost-latin-ext-400-italic.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:Jost;font-style:italic;font-weight:400;font-display:swap;src:url("fonts/jost-latin-400-italic.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:Vazirmatn;font-style:normal;font-weight:100 900;font-display:swap;src:url("fonts/vazirmatn-fa.woff2") format("woff2");unicode-range:U+0600-06FF,U+200C-200D,U+FB50-FDFF,U+FE70-FEFF;}
 body {
   background: var(--canvas);
 
@@ -20,7 +20,7 @@ body {
   width: 380px;
   height: 52px;
   padding: 24px;
-  border-radius: 40px;
+  border-radius:0;
   overflow: hidden;
   background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 100%);
   box-shadow: 0 0 16px 0 rgba(0,0,0,0);
@@ -33,7 +33,7 @@ body {
 .modal.active {
   height: 160px;
   padding: 32px;
-  border-radius: 48px;
+  border-radius:0;
 }
 
 .field-wrapper {
@@ -44,7 +44,7 @@ body {
 }
 
 .field {
-  font-family: "Jost", "Avenir Next", sans-serif;
+  font-family:Jost;
   font-optical-sizing: auto;
   font-style: normal;
   /*   font-variation-settings: "wdth" 100; */
@@ -52,7 +52,7 @@ body {
   display: flex;
   align-items: center;
   min-height: 48px;
-  border-radius: 16px;
+  border-radius:0;
   border: 1px solid rgba(0,0,0,0.05);
   padding: 0 12px 2px 12px;
   background: none;
@@ -70,7 +70,7 @@ body {
 }
 
 .sign, .signed-by {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family:Jost;
   font-optical-sizing: auto;
   font-style: normal;
   text-transform: uppercase;
@@ -90,7 +90,7 @@ body {
   gap: 8px;
   align-items: center;
   height: 44px;
-  border-radius: 12px;
+  border-radius:0;
   padding: 0 14px 2px 12px;
   background: #2a272d;
   color: #f9fafb;
@@ -502,11 +502,11 @@ html,body{max-width:100%;overflow-x:hidden}
 body{background:var(--canvas);color:var(--ink);font-family:var(--font-sans)}
 .ilg-page{max-width:48rem;margin:0 auto;padding:clamp(1.25rem,4vw,3rem) clamp(1rem,4vw,1.5rem);min-height:100dvh}
 .ilg-page .ilg-kicker{font-weight:500;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--label);margin:0 0 .5rem}
-.ilg-page h1{font-family:var(--title-lat-family);font-weight:400;font-size:clamp(2rem,5vw,3rem);color:var(--title);margin:.25rem 0 .75rem}
+.ilg-page h1{font-family:Jost;font-weight:400;font-size:clamp(2rem,5vw,3rem);color:var(--title);margin:.25rem 0 .75rem}
 .ilg-page h1 .initial{color:var(--accent-dot)}
 .ilg-page .lede{font-weight:300;font-size:1.1rem;max-width:36rem;margin:0 0 1.25rem}
-.ilg-app-stage{position:relative;min-height:420px;margin:1rem 0 2rem;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.ilg-app-stage{position:relative;min-height:420px;margin:1rem 0 2rem;background:var(--surface);border:1px solid var(--line);border-radius:0;overflow:hidden}
 .ilg-app-stage .modal{position:relative;left:auto;top:auto;transform:none;margin:48px auto;width:min(380px,92%)}
-.theme-toggle{position:fixed;top:16px;right:16px;z-index:20;font:inherit;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.theme-toggle{position:fixed;top:16px;right:16px;z-index:20;font:inherit;padding:8px 16px;border-radius:0;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
 .theme-toggle:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
 .ilg-credit{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:2rem}
