@@ -528,3 +528,27 @@ html,body{max-width:100%;overflow-x:hidden}
 .frame > .theme-toggle,#theme-toggle.theme-toggle{
   position:static;inset:auto;width:auto;height:auto;max-width:none;object-fit:unset;
 }
+
+/* tighter live demo — fill the content-height frame, no 16:10 void */
+.frame.live > .live-pad,
+#app-frame > .live-pad{
+  width:100%;
+  height:auto;
+  min-height:0;
+  display:flex;
+  align-items:stretch;
+  justify-content:stretch;
+  padding:16px;
+  box-sizing:border-box;
+}
+.frame.live .modal,
+#app-frame .modal{
+  width:100%;
+  max-width:none;
+  margin:0;
+  flex:1 1 auto;
+}
+@media (max-width:600px){
+  .frame.live > .live-pad,
+  #app-frame > .live-pad{padding:12px}
+}

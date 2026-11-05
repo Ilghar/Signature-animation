@@ -34,7 +34,7 @@
   <section class="span12" aria-label="Live function">
     <h2>Live function</h2>
     <figure>
-      <div class="frame r1610" id="app-frame">
+      <div class="frame live" id="app-frame">
         <div class="live-pad">
           <div class="modal">
             <div class="field-wrapper">
@@ -320,6 +320,47 @@
   </section>
 
   <footer class="span12">ilghar.studio</footer>
+
+  <section class="span12" aria-label="Proof">
+    <h2>Proof</h2>
+    <div class="grid-444">
+      <div class="card"><h3>Stroke bank</h3><p>Each letter is a hand-traced SVG path, not a font outline.</p></div>
+      <div class="card"><h3>Native field</h3><p>Type, paste and IME stay on a real input — the bank only draws.</p></div>
+      <div class="card"><h3>Motion</h3><p>prefers-reduced-motion settles the ink without the draw.</p></div>
+    </div>
+  </section>
+  <section class="span12" aria-label="Project material">
+    <h2>Project material</h2>
+    <div class="grid-66">
+      <figure>
+        <div class="frame r1610">
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="hero/hero-dark.svg">
+            <img src="hero/hero-light.svg" width="960" height="600" alt="Signature animation hero: SIGNATURE / ANIMATION wordmark with type-trace-sign cue.">
+          </picture>
+        </div>
+        <figcaption>Hero board — light</figcaption>
+      </figure>
+      <figure>
+        <div class="frame r1610">
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="hero/hero-dark.svg">
+            <img src="hero/hero-light.svg" width="960" height="600" alt="Same hero board in the dark theme, token mauve on dark paper.">
+          </picture>
+        </div>
+        <figcaption>Hero board — dark</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="span12" aria-label="How it works">
+    <h2>How it works</h2>
+    <ul class="dots">
+      <li>A name in the field maps each character to a stroke in the letter bank.</li>
+      <li>Sign draws the strokes in order; the ink settles on the baseline.</li>
+      <li>Light and dark follow the system or the header toggle.</li>
+    </ul>
+  </section>
+
 </main></div>
 <script src="./script.js"></script>
 <script>
