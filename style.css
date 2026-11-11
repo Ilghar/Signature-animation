@@ -1,161 +1,155 @@
-@font-face{font-family:Jost;font-style:normal;font-weight:300;font-display:swap;src:url("fonts/jost-latin-ext-300-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:Jost;font-style:normal;font-weight:300;font-display:swap;src:url("fonts/jost-latin-300-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:Jost;font-style:normal;font-weight:400;font-display:swap;src:url("fonts/jost-latin-ext-400-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:Jost;font-style:normal;font-weight:400;font-display:swap;src:url("fonts/jost-latin-400-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:Jost;font-style:normal;font-weight:500;font-display:swap;src:url("fonts/jost-latin-ext-500-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:Jost;font-style:normal;font-weight:500;font-display:swap;src:url("fonts/jost-latin-500-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:Jost;font-style:normal;font-weight:600;font-display:swap;src:url("fonts/jost-latin-ext-600-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:Jost;font-style:normal;font-weight:600;font-display:swap;src:url("fonts/jost-latin-600-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:Jost;font-style:italic;font-weight:400;font-display:swap;src:url("fonts/jost-latin-ext-400-italic.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:Jost;font-style:italic;font-weight:400;font-display:swap;src:url("fonts/jost-latin-400-italic.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:Vazirmatn;font-style:normal;font-weight:100 900;font-display:swap;src:url("fonts/vazirmatn-fa.woff2") format("woff2");unicode-range:U+0600-06FF,U+200C-200D,U+FB50-FDFF,U+FE70-FEFF;}
-body {
-  background: var(--bg);
-  color: var(--fg);
-}
+@font-face{font-family:Jost;font-style:normal;font-weight:300;font-display:swap;src:url("fonts/jost-latin-ext-300-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:Jost;font-style:normal;font-weight:300;font-display:swap;src:url("fonts/jost-latin-300-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:Jost;font-style:normal;font-weight:400;font-display:swap;src:url("fonts/jost-latin-ext-400-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:Jost;font-style:normal;font-weight:400;font-display:swap;src:url("fonts/jost-latin-400-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:Jost;font-style:italic;font-weight:400;font-display:swap;src:url("fonts/jost-latin-ext-400-italic.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:Jost;font-style:italic;font-weight:400;font-display:swap;src:url("fonts/jost-latin-400-italic.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:Vazirmatn;font-style:normal;font-weight:100 900;font-display:swap;src:url("fonts/vazirmatn-fa.woff2") format("woff2");unicode-range:U+0600-06FF,U+200C-200D,U+FB50-FDFF,U+FE70-FEFF;}
 
-
-
-/* Live app — single control stack inside pages-shell .frame.r1610 */
+/* Live signature app (LAYOUT v2 glass). Letter-bank metrics kept below. */
 .live-pad{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:100%;
-  height:100%;
-  padding:24px;
-  box-sizing:border-box;
-  background:var(--bg);
+  display:flex;align-items:stretch;justify-content:stretch;
+  width:100%;height:auto;min-height:0;padding:24px;box-sizing:border-box
 }
-.modal {
-  position: relative;
-  left: auto;
-  top: auto;
-  transform: none;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 24px;
-  width: min(420px, 100%);
-  height: auto;
-  min-height: 52px;
-  padding: 0;
-  border-radius: 0;
-  overflow: visible;
-  background: transparent;
-  box-shadow: none;
-  border: 0;
-  transition: none;
-}
-.modal:hover {
-  box-shadow: none;
-}
-.modal.active {
-  height: auto;
-  padding: 0;
-  border-radius: 0;
+@media (max-width:767px){.live-pad{padding:16px}}
+
+/* Live frame glass lives in glass.css (v2 tokens, swappable). */
+
+.modal{
+  position:relative;display:flex;flex-direction:column;align-items:stretch;
+  gap:0;width:100%;margin:0;padding:0;background:transparent;border:0;box-shadow:none;overflow:visible
 }
 
-.field-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+.field-wrapper{position:relative}
+.field{
+  width:100%;min-height:52px;font:400 20px/1.2 var(--font);color:var(--fg);
+  padding:0 112px 0 16px;box-sizing:border-box;outline:none
+}
+.field::placeholder{color:var(--label);opacity:1}
+
+.sign{
+  position:absolute;right:6px;top:6px;height:40px;
+  display:flex;gap:8px;align-items:center;
+  font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+  padding:0 16px;cursor:pointer
+}
+.sign svg{width:12px;height:12px;flex:none}
+.sign:disabled{opacity:.45;cursor:not-allowed}
+
+.signature{margin-top:24px;padding:4px 0 10px;border-bottom:1px solid var(--line);text-align:center}
+.signed-by{
+  font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--label);
+  padding-bottom:2px;text-align:center;opacity:1
+}
+.signed-by.is-on{opacity:1}
+
+/* Drawing canvas — later font-picker previews also live in .sig-preview */
+.sig-preview{
+  --ink-current:var(--sig,var(--plum));
+  display:block;width:100%;min-height:51px
+}
+[data-theme=dark] .sig-preview{--ink-current:var(--mauve-em)}
+:root:not([data-theme=light]):not([data-theme=dark]){
+  /* system dark without an explicit toggle still uses mauve ink */
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme=light]) .sig-preview{--ink-current:var(--mauve-em)}
 }
 
-.field {
-  font-family: Jost;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  min-height: 48px;
-  border-radius: 0;
-  border: 1px solid var(--line);
-  padding: 0 88px 0 12px;
-  background: var(--bg);
-  color: var(--fg);
-  outline: none;
-  transition: border 0.2s;
-  width: 100%;
-  box-sizing: border-box;
+/* Signed-by canvas only: fill ~60% of the panel, ink at full opacity.
+   Picker tiles keep the compact .sig-preview rules above. */
+#sig-preview{
+  display:flex;justify-content:center;width:100%;overflow:visible;opacity:1;
+  --ink-current:var(--plum)
 }
-.active .field,
-.field:focus {
-  border: 1px solid var(--mauve-em);
+[data-theme=dark] #sig-preview{--ink-current:#856a8e}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme=light]) #sig-preview{--ink-current:#856a8e}
 }
-
-.field::placeholder {
-  opacity: 1;
-  color: var(--label);
+#sig-preview,
+#sig-preview .signature-main,
+#sig-preview path{
+  opacity:1;stroke-opacity:1;fill-opacity:1
 }
-
-.sign, .signed-by {
-  font-family: Jost;
-  font-optical-sizing: auto;
-  font-style: normal;
-  text-transform: uppercase;
-  font-size: 12px;
-  letter-spacing: 0.12em;
+#sig-preview .signature-main{
+  display:flex;flex-flow:nowrap;justify-content:center;align-items:center;
+  width:max-content;max-width:none;transform-origin:top center
 }
-.active .signed-by {
-  opacity: 1;
+#sig-preview .sig-relief,
+#sig-preview .sig-filled{
+  max-width:none;width:auto;height:84px
+}
+@media (max-width:767px){
+  #sig-preview .sig-relief,
+  #sig-preview .sig-filled{height:58px}
 }
 
-.sign {
-  position: absolute;
-  right: 4px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  height: 40px;
-  border-radius: 0;
-  padding: 0 14px;
-  background: var(--card);
-  color: var(--paper);
-  border: 1px solid var(--card);
-  opacity: 0.35;
-  transition: 0.2s;
-  cursor: pointer;
-  font-weight: 400;
+.signature-main{
+  display:flex;min-height:51px;flex-flow:wrap;justify-content:center;align-items:center
 }
-[data-theme=dark] .sign {
-  background: var(--mauve-em);
-  border-color: var(--mauve-em);
-  color: var(--paper);
+.letter-bank{display:none}
+
+/* Word space: a fixed gap. Adjacent letters drop their outward negative
+   side bearings (.word-start / .word-end) so "Hāèl Ilghar" cannot run together. */
+.signature-main > .space{
+  flex:0 0 16px;width:16px;min-width:16px;max-width:16px;margin:0;padding:0;
+  box-sizing:content-box;pointer-events:none
 }
-.active .sign {
-  opacity: 1;
+.signature-main > .word-end{margin-right:0 !important}
+.signature-main > .word-start{margin-left:0 !important}
+
+
+
+.sig-preview.mode-stroke path,
+.signature-main.mode-stroke path{
+  stroke-linejoin:round;stroke-linecap:round;stroke-width:1;
+  stroke:var(--ink-current);fill:none;
+  transition:stroke-dashoffset .2s linear
+}
+.sig-preview.mode-fill path,
+.signature-main.mode-fill path{
+  fill:var(--ink-current);stroke:none
+}
+.signature-main .up,
+.signature-main .lo,
+.signature-main .fallback{
+  position:relative;max-height:51px
+}
+.signature-main .accent{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);pointer-events:none
 }
 
-.signature {
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 8px;
+.ctl-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:24px}
+@media (min-width:768px){.ctl-grid{grid-template-columns:1fr}}
+.label{display:block;margin:0 0 8px}
+
+.swatches{display:flex;gap:12px;align-items:center;flex-wrap:wrap;min-height:44px}
+.sw{
+  width:32px;height:32px;border-radius:50%;padding:0;cursor:pointer;
+  border:1px solid var(--glass-edge);
+  box-shadow:-2px -2px 5px var(--sh-l),3px 3px 7px var(--sh-d)
+}
+.sw[aria-pressed=true]{box-shadow:0 0 0 2px var(--canvas),0 0 0 3.5px var(--name)}
+.sw.custom{
+  background:transparent;border:1px dashed var(--line);display:grid;place-items:center;
+  box-shadow:none;color:var(--label)
+}
+.sw.custom svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.4}
+.sw-name{font-size:13px;color:var(--sec);margin-left:4px}
+.ink-custom{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+
+.export{margin-top:24px;padding-top:16px;border-top:1px dotted var(--line)}
+.export .row{display:flex;flex-wrap:wrap;gap:10px}
+.export button{font-size:13px;letter-spacing:.08em;padding:6px 12px;cursor:pointer}
+.note{font-size:13px;color:var(--sec);margin:10px 0 0;text-transform:none;letter-spacing:0}
+.export .status-msg{font-size:13px;color:var(--sec);margin:8px 0 0;min-height:1em}
+
+@media (prefers-reduced-motion:reduce){
+  .signature-main svg path,
+  .sig-preview svg path{transition:none;stroke-dashoffset:0}
 }
 
-.letter-bank {
-  display: none;
-}
-
-.signed-by {
-  color: var(--label);
-  opacity: 0;
-  padding-bottom: 2px;
-  transition: 0.2s ease;
-}
-
-.signature-main {
-  display: flex;
-  min-height: 51px;
-  flex-flow: wrap;
-  justify-content: start;
-}
-
-.signature-main svg path {
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  stroke-width: 1;
-  stroke: var(--head);
-  transition: 0.2s stroke-dashoffset;
-}
-[data-theme=dark] .signature-main svg path {
-  stroke: var(--on-dark);
-}
-
+/* letter boxes + dash lengths (hand-drawn bank) */
 .up, .lo {
   max-height: 51px;
 }
@@ -520,35 +514,100 @@ body {
   stroke-dashoffset: 67;
 }
 
+/* ===== Mock feedback: fewer outlines, mauve-tint fills, 3px LIVE already via --r-tag ===== */
+.field-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.field-bg i{position:absolute;border-radius:50%;filter:blur(40px)}
+.field-bg .b1{width:420px;height:420px;left:calc(50% - 470px);top:250px;background:var(--bg1)}
+.field-bg .b2{width:360px;height:360px;left:calc(50% + 120px);top:470px;background:var(--bg2)}
+.field-bg .b3{width:300px;height:300px;left:calc(50% - 60px);top:820px;background:var(--bg3)}
+@media (max-width:767px){
+  .field-bg .b1{left:-140px;top:300px;width:320px;height:320px}
+  .field-bg .b2{left:150px;top:560px;width:280px;height:280px}
+  .field-bg .b3{left:-40px;top:980px}
+}
+.ilg-case{position:relative}
+.ilg-case main{position:relative;z-index:1}
 
-/* pages-layout-20261105: page chrome handled by pages-shell; app sits in .frame.r1610 */
-html,body{max-width:100%;overflow-x:hidden}
-/* Do not let .frame.r1610>* stretch the live-pad children to cover the viewport. */
-.frame.r1610 > .live-pad{width:100%;height:100%;object-fit:unset}
-.frame > .theme-toggle,#theme-toggle.theme-toggle{
-  position:static;inset:auto;width:auto;height:auto;max-width:none;object-fit:unset;
+.sign{background:var(--tint-strong);color:var(--on-tint)}
+.status,.badge{border:0;background:var(--tint);color:var(--on-tint);border-radius:var(--r-tag)}
+.export{border-top:0;padding-top:0}
+.sw[aria-pressed=true]{box-shadow:0 0 0 6px var(--tint-strong)}
+.sw.custom{border:0;background:var(--tint);color:var(--name);box-shadow:none}
+.theme-toggle[aria-pressed=true]{background:var(--tint)}
+.select[aria-expanded=true]{background:var(--tint);color:var(--name)}
+.opt[aria-selected=true]{
+  background:var(--tint-strong);
+  box-shadow:inset 2px 2px 6px var(--sh-d),inset -2px -2px 6px var(--sh-l)
+}
+.opt[aria-selected=true] .fname{color:var(--name)}
+[data-theme=dark] .sign,
+[data-theme=dark] .status,
+[data-theme=dark] .select[aria-expanded=true],
+[data-theme=dark] .theme-toggle[aria-pressed=true],
+[data-theme=dark] .opt[aria-selected=true] .fname,
+[data-theme=dark] .opt[aria-selected=true] .prev,
+[data-theme=dark] .sw.custom{color:var(--on-dark)}
+[data-theme=dark] .opt[aria-selected=true] .check{stroke:var(--on-dark)}
+
+/* pink ring only for keyboard focus */
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--ring);outline-offset:3px}
+
+/* Typeface picker */
+.ctl-grid{grid-template-columns:1fr;gap:16px}
+@media (min-width:768px){.ctl-grid{grid-template-columns:1fr 1fr}}
+.picker{margin-top:0}
+.select{
+  display:flex;justify-content:space-between;align-items:center;
+  width:100%;min-height:44px;padding:6px 14px;text-align:left;cursor:pointer
+}
+.select .chev{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.4;transition:transform .16s}
+.select[aria-expanded=true] .chev{transform:rotate(180deg)}
+.listbox{
+  list-style:none;margin:12px 0 0;padding:0;
+  display:none;grid-template-columns:1fr 1fr;gap:16px
+}
+.listbox.is-open{display:grid}
+@media (max-width:767px){.listbox,.listbox.is-open{grid-template-columns:1fr;gap:12px}}
+.opt{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;text-align:center;padding:12px 16px 14px;min-height:108px;position:relative;cursor:pointer}
+@media (max-width:767px){.opt{min-height:88px}}
+.opt .fname{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--label);font-family:var(--font);font-weight:400
+}
+.opt .prev{display:flex;justify-content:center;align-items:center;color:var(--ink-current,var(--sig));line-height:1.25;white-space:nowrap;overflow:hidden;margin-top:6px;min-height:50px;width:100%}
+[data-theme=dark] .opt .prev{color:var(--ink-current,var(--mauve-em))}
+.opt .check{width:14px;height:14px;stroke:var(--name);fill:none;stroke-width:1.6}
+.listbox .wide{grid-column:1/-1}
+
+/* Relief SingleLine preview + canvas */
+.sig-relief{display:block;width:auto;max-width:100%;overflow:visible;height:84px;margin-inline:auto}
+.sig-relief path{vector-effect:non-scaling-stroke;stroke-width:2.2px;fill:none;stroke:var(--ink-current)}
+.r-xl{height:84px} .r-md{height:64px} .r-prev{height:40px;margin-top:4px}
+.r-prev path{stroke-width:1.6px}
+.r-xl path{stroke-width:2.8px}
+@media (max-width:767px){.r-xl,.sig-relief{height:58px}.r-md{height:50px}.r-prev{height:36px}.r-xl path{stroke-width:2.2px}}
+
+.sig-filled{display:block;width:auto;max-width:100%;height:84px;overflow:visible;margin-inline:auto}
+@media (max-width:767px){.sig-filled{height:58px}}
+.sig-preview .wipe-target{transform-origin:left center}
+.sig-preview.is-wiping .wipe-target{
+  animation:sig-wipe 1.2s ease-out forwards
+}
+@keyframes sig-wipe{
+  from{clip-path:inset(0 100% 0 0)}
+  to{clip-path:inset(0 0 0 0)}
+}
+@media (prefers-reduced-motion:reduce){
+  .sig-preview.is-wiping .wipe-target{animation:none;clip-path:none}
+  .sig-relief path,.signature-main.mode-stroke path{transition:none;stroke-dashoffset:0}
 }
 
-/* tighter live demo — fill the content-height frame, no 16:10 void */
-.frame.live > .live-pad,
-#app-frame > .live-pad{
-  width:100%;
-  height:auto;
-  min-height:0;
-  display:flex;
-  align-items:stretch;
-  justify-content:stretch;
-  padding:16px;
-  box-sizing:border-box;
-}
-.frame.live .modal,
-#app-frame .modal{
-  width:100%;
-  max-width:none;
-  margin:0;
-  flex:1 1 auto;
-}
-@media (max-width:600px){
-  .frame.live > .live-pad,
-  #app-frame > .live-pad{padding:12px}
-}
+/* Hand-traced tile preview is a compact signature-main */
+.opt .prev.signature-main,.opt .prev.hand-prev{min-height:0;height:44px;overflow:hidden;transform-origin:left center;transform:scale(.72);margin-top:2px}
+.opt .prev.hand-prev .signature-main{min-height:0}
+
+.howto{margin-top:16px}
+.embed-block{margin-top:12px}
+.embed-block .label{margin-top:12px}
+.embed-block pre{font:400 13px/1.45 var(--font)}

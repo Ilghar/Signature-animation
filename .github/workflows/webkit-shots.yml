@@ -1,0 +1,39 @@
+name: WebKit shots
+on:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  webkit-shots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Host apt for --with-deps hung for 22 minutes on a bare runner.
+    # The official image already has the WebKit system libraries.
+    container: mcr.microsoft.com/playwright:v1.65.0-noble
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Playwright
+        run: npm install --no-save playwright@1.65.0
+      - name: Install WebKit
+        env:
+          CI: true
+          DEBIAN_FRONTEND: noninteractive
+        run: npx playwright install --with-deps webkit
+      - name: Serve the site and screenshot in WebKit
+        run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 &
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            if curl -fsS http://127.0.0.1:8080/index.html >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:8080/index.html >/dev/null
+          node scripts/webkit-shots.mjs
+        env:
+          BASE_URL: http://127.0.0.1:8080
+          OUT_DIR: ${{ github.workspace }}/webkit-shots
+      - uses: actions/upload-artifact@v4
+        with:
+          name: webkit-shots
+          path: webkit-shots/
+          if-no-files-found: error

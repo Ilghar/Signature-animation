@@ -5,12 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light dark">
 <title>Signature animation — ilghar.studio</title>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors https://portfolio.adobe.com/* https://*.myportfolio.com/* https://ilghar.studio/*">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'">
 <link rel="stylesheet" href="./tokens.css">
 <link rel="stylesheet" href="./pages-shell.css">
 <link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./glass.css">
 </head>
 <body>
+<div class="field-bg" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
 <div class="ilg-case"><main>
   <header class="site span12">
     <p class="brand-label">ilghar.studio | signature animation</p>
@@ -34,20 +36,19 @@
   <section class="span12" aria-label="Live function">
     <h2>Live function</h2>
     <figure>
-      <div class="frame live" id="app-frame">
+      <div class="glass-frame frame live" id="app-frame">
         <div class="live-pad">
           <div class="modal">
             <div class="field-wrapper">
-              <input autocomplete="off" name="hidden" class="field" maxlength="256" placeholder="Your name" type="text" id="First-name" required="">
-              <button type="button" class="sign">
+              <input autocomplete="off" name="hidden" class="field" maxlength="256" placeholder="Your name" type="text" id="First-name" required="" aria-label="Your name">
+              <button type="button" class="sign" disabled>
                 <svg width="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M7.72421 4.666H5.13421C4.86052 4.66592 4.59342 4.75007 4.3692 4.90703C4.14498 5.06398 3.97449 5.28614 3.88088 5.54333L1.37421 12.438C1.28555 12.6813 1.34621 12.954 1.52888 13.1373L1.72421 13.3327L6.00555 9.05133C6.00488 9.034 6.00022 9.01667 6.00022 8.99933C6.00022 8.80155 6.05886 8.60821 6.16875 8.44376C6.27863 8.27932 6.43481 8.15114 6.61753 8.07546C6.80026 7.99977 7.00132 7.97996 7.19531 8.01855C7.38929 8.05713 7.56747 8.15238 7.70732 8.29223C7.84717 8.43208 7.94241 8.61026 7.981 8.80424C8.01959 8.99823 7.99978 9.19929 7.92409 9.38202C7.84841 9.56474 7.72023 9.72092 7.55579 9.8308C7.39134 9.94069 7.198 9.99933 7.00022 9.99933C6.98288 9.99933 6.96555 9.99467 6.94822 9.994L2.66688 14.2753L2.86221 14.4707C2.95185 14.5605 3.06534 14.6228 3.18927 14.6503C3.31319 14.6777 3.44238 14.669 3.56155 14.6253L10.4562 12.118C10.7134 12.0244 10.9356 11.8539 11.0925 11.6297C11.2495 11.4055 11.3336 11.1384 11.3335 10.8647V8.27467L12.6662 6.94267L9.05688 3.33333L7.72421 4.666ZM13.2929 6.04067L9.95955 2.70733L11.3729 1.29333L14.7062 4.62667L13.2929 6.04067Z" fill="currentColor"/>
                 </svg>
                 Sign
               </button>
             </div>
-            <div class="signature">
-<div class="letter-bank">
+            <div class="letter-bank">
       <div class="a up">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 46 51" height="51" width="46">
           <path d="M14.9987 32.0003C20.8769 23.2406 40.7942 1.02295 44.6176 1.58265C48.4411 2.14235 25.4397 26.0685 19.6688 50.0398C28.2839 11.7157 5.83642 32.6888 1.46688 33.1804C4.63512 27.4831 32.8719 20.946 44.7496 24.6628"></path>
@@ -309,8 +310,70 @@
         </svg>
       </div>
     </div>
-    <div class="signed-by">Signed by,</div>
-    <div class="signature-main"></div>
+
+            <div class="signature">
+              <div class="signed-by">Signed by,</div>
+              <div class="sig-preview mode-stroke" id="sig-preview">
+                <div class="signature-main mode-stroke" aria-label="Signature preview"></div>
+              </div>
+            </div>
+            <div class="ctl-grid">
+              <div class="picker">
+                <span class="label" id="tf-label">Typeface</span>
+                <button type="button" class="select" id="font-select" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="tf-label" aria-controls="font-list">
+                  <span data-font-label>Hand-traced</span>
+                  <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4.5l4 4 4-4"/></svg>
+                </button>
+                <ul class="listbox" role="listbox" id="font-list" aria-labelledby="tf-label">
+                  <li role="none" class="wide"><button type="button" role="option" class="opt" data-font="hand-traced" aria-selected="true"><span class="fname"><span>Hand-traced</span></span><span class="prev sig-preview mode-stroke"></span></button></li>
+                  <li role="none" class="wide"><button type="button" role="option" class="opt" data-font="relief" aria-selected="false"><span class="fname"><span>Relief SingleLine</span></span><span class="prev sig-preview mode-stroke"></span></button></li>
+                  <li role="none"><button type="button" role="option" class="opt" data-font="allura" aria-selected="false"><span class="fname"><span>Allura</span></span><span class="prev sig-preview mode-fill"></span></button></li>
+                  <li role="none"><button type="button" role="option" class="opt" data-font="great-vibes" aria-selected="false"><span class="fname"><span>Great Vibes</span></span><span class="prev sig-preview mode-fill"></span></button></li>
+                  <li role="none"><button type="button" role="option" class="opt" data-font="dancing-script" aria-selected="false"><span class="fname"><span>Dancing Script</span></span><span class="prev sig-preview mode-fill"></span></button></li>
+                  <li role="none"><button type="button" role="option" class="opt" data-font="caveat" aria-selected="false"><span class="fname"><span>Caveat</span></span><span class="prev sig-preview mode-fill"></span></button></li>
+                </ul>
+              </div>
+              <div>
+                <span class="label">Ink</span>
+                <div class="swatches" role="radiogroup" aria-label="Ink">
+                  <button type="button" class="sw" data-ink="plum" style="background:var(--plum)" aria-pressed="true" aria-label="Plum"></button>
+                  <button type="button" class="sw" data-ink="ink" style="background:var(--ink)" aria-pressed="false" aria-label="Ink"></button>
+                  <button type="button" class="sw" data-ink="mauve" style="background:var(--mauve-em)" aria-pressed="false" aria-label="Mauve"></button>
+                  <button type="button" class="sw" data-ink="grey" style="background:var(--grey)" aria-pressed="false" aria-label="Grey"></button>
+                  <button type="button" class="sw custom" data-ink="custom" aria-pressed="false" aria-label="Custom colour">
+                    <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.5v9M1.5 6h9"/></svg>
+                  </button>
+                  <input type="color" id="ink-custom" class="ink-custom" value="#473448" tabindex="-1" aria-label="Custom ink colour">
+                  <span class="sw-name" id="inkname">Plum</span>
+                </div>
+              </div>
+            </div>
+            <div class="export">
+              <span class="label">Export</span>
+              <div class="row">
+                <button type="button" id="export-svg">SVG</button>
+                <button type="button" id="export-png2">PNG 2×</button>
+                <button type="button" id="export-png4">PNG 4×</button>
+                <button type="button" id="export-pdf">PDF</button>
+                <button type="button" id="export-embed">Copy embed code</button>
+              </div>
+              <p class="note">Transparent background. Hand-traced and Relief export as stroked paths; the script faces export as filled paths. No photos, no background rectangle.</p>
+              <p class="status-msg" id="export-status" role="status"></p>
+              <div class="howto">
+                <p class="label">Use it as a signature</p>
+                <dl class="howto">
+                  <dt>Word</dt>
+                  <dd>Insert &gt; Pictures &gt; This Device and choose the SVG or a 2×/4× PNG. SVG stays sharp when the document is scaled.</dd>
+                  <dt>Google Docs</dt>
+                  <dd>Insert &gt; Image &gt; Upload from computer, then pick the PNG or SVG.</dd>
+                  <dt>Photoshop</dt>
+                  <dd>File &gt; Place Embedded for the SVG (Smart Object) or open the PNG. The background is already transparent.</dd>
+                </dl>
+              </div>
+              <div class="embed-block">
+                <span class="label">Embed code</span>
+                <pre id="embed-code">Press “Copy embed code” for an inline SVG and an &lt;img&gt; snippet.</pre>
+              </div>
             </div>
           </div>
         </div>
@@ -324,9 +387,9 @@
   <section class="span12" aria-label="Proof">
     <h2>Proof</h2>
     <div class="grid-444">
-      <div class="card"><h3>Stroke bank</h3><p>Each letter is a hand-traced SVG path, not a font outline.</p></div>
-      <div class="card"><h3>Native field</h3><p>Type, paste and IME stay on a real input — the bank only draws.</p></div>
-      <div class="card"><h3>Motion</h3><p>prefers-reduced-motion settles the ink without the draw.</p></div>
+      <div class="card"><h3>Stroke bank</h3><p>The default “Hand-traced” set is a single-stroke letter bank. Accents such as ā and è are extra strokes, not a second font.</p></div>
+      <div class="card"><h3>Sign</h3><p>Sign (or Enter) replays the name in order. Paste and IME update from the field. prefers-reduced-motion settles the ink at once.</p></div>
+      <div class="card"><h3>Export</h3><p>Downloads are real vector paths: stroked for Hand-traced and Relief, filled for the script faces. PNG and PDF share that artwork.</p></div>
     </div>
   </section>
   <section class="span12" aria-label="Project material">
@@ -335,7 +398,7 @@
       <figure>
         <div class="frame r1610">
           <picture>
-            <source media="(prefers-color-scheme: dark)" srcset="hero/hero-dark.svg">
+            <source media="(prefers-color-scheme: dark)" srcset="hero/hero-light.svg">
             <img src="hero/hero-light.svg" width="960" height="600" alt="Signature animation hero: SIGNATURE / ANIMATION wordmark with type-trace-sign cue.">
           </picture>
         </div>
@@ -345,7 +408,7 @@
         <div class="frame r1610">
           <picture>
             <source media="(prefers-color-scheme: dark)" srcset="hero/hero-dark.svg">
-            <img src="hero/hero-light.svg" width="960" height="600" alt="Same hero board in the dark theme, token mauve on dark paper.">
+            <img src="hero/hero-dark.svg" width="960" height="600" alt="Same hero board in the dark theme, token mauve on dark paper.">
           </picture>
         </div>
         <figcaption>Hero board — dark</figcaption>
@@ -355,56 +418,13 @@
   <section class="span12" aria-label="How it works">
     <h2>How it works</h2>
     <ul class="dots">
-      <li>A name in the field maps each character to a stroke in the letter bank.</li>
-      <li>Sign draws the strokes in order; the ink settles on the baseline.</li>
-      <li>Light and dark follow the system or the header toggle.</li>
+      <li>Type or paste a name; each character maps to a stroke or a filled glyph in the chosen typeface.</li>
+      <li>Sign draws Hand-traced and Relief stroke by stroke, and wipes the script faces from left to right.</li>
+      <li>Export a transparent SVG, PNG (2× or 4×) or PDF, or copy the embed snippets for a document.</li>
     </ul>
   </section>
 
 </main></div>
 <script src="./script.js"></script>
-<script>
-(function(){
-  var r=document.documentElement;
-  var b=document.getElementById("theme-toggle");
-  if(!b) return;
-  var k="ilg-theme";
-  var m=window.matchMedia && matchMedia("(prefers-color-scheme: dark)");
-  var s=null;
-  try{s=localStorage.getItem(k)}catch(e){}
-  function dark(){
-    var t=r.getAttribute("data-theme");
-    return t ? t==="dark" : !!(m && m.matches);
-  }
-  function sync(){
-    var d=dark();
-    b.setAttribute("aria-pressed", String(d));
-    b.textContent = d ? "Light mode" : "Dark mode";
-    var root=document.querySelector(".ilg-case");
-    if(d){
-      root.setAttribute("data-theme","dark");
-      r.setAttribute("data-theme","dark");
-      r.classList.add("dark"); r.classList.remove("light");
-    }else{
-      root.setAttribute("data-theme","light");
-      r.setAttribute("data-theme","light");
-      r.classList.add("light"); r.classList.remove("dark");
-    }
-  }
-  if(s==="dark"||s==="light"){
-    r.setAttribute("data-theme", s);
-    document.querySelector(".ilg-case").setAttribute("data-theme", s);
-  }
-  sync();
-  if(m && m.addEventListener) m.addEventListener("change", sync);
-  b.addEventListener("click", function(){
-    var n=dark()?"light":"dark";
-    r.setAttribute("data-theme", n);
-    document.querySelector(".ilg-case").setAttribute("data-theme", n);
-    try{localStorage.setItem(k,n)}catch(e){}
-    sync();
-  });
-})();
-</script>
 </body>
 </html>
