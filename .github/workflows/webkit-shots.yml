@@ -5,6 +5,7 @@ on:
 jobs:
   webkit-shots:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v4
@@ -13,7 +14,10 @@ jobs:
       - name: Install Playwright
         run: npm install --no-save playwright
       - name: Install WebKit
-        run: npx playwright install --with-deps webkit
+        env:
+          CI: true
+          DEBIAN_FRONTEND: noninteractive
+        run: npx --no-install playwright install --with-deps webkit
       - name: Serve the site and screenshot in WebKit
         run: |
           python3 -m http.server 8080 --bind 127.0.0.1 &
