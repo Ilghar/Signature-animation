@@ -392,16 +392,24 @@ async function renderRelief(value, animate, gen) {
     })
     return
   }
+  // Hide every stroke first so nothing shows before its turn to draw.
+  const lens = paths.map((p) => {
+    let len = 40
+    try { len = p.getTotalLength() } catch (e) { /* ignore */ }
+    p.style.transition = 'none'
+    p.style.strokeDasharray = String(len)
+    p.style.strokeDashoffset = String(len)
+    return len
+  })
   // Stroke by stroke, grouped by letter (parts[i].strokes).
   let idx = 0
   for (const part of built.parts) {
     for (let s = 0; s < part.strokes.length; s++) {
       if (gen !== playGen) return
-      const p = paths[idx++]
+      const i = idx++
+      const p = paths[i]
       if (!p) continue
-      let len = 40
-      try { len = p.getTotalLength() } catch (e) { /* ignore */ }
-      await strokeIn(p, len, true, 0)
+      await strokeIn(p, lens[i], true, 0)
     }
   }
 }
@@ -683,8 +691,9 @@ function tightSvg(html, mode, hex) {
       svg.setAttribute('stroke-linecap', 'round')
       svg.setAttribute('stroke-linejoin', 'round')
     } else {
-      svg.setAttribute('fill', hex)
+      svg.removeAttribute('fill')
       svg.removeAttribute('stroke')
+      svg.querySelectorAll('path').forEach((p) => p.setAttribute('fill', hex))
     }
     // strip size-only presentation, leave paths
     svg.querySelectorAll('title,desc').forEach((n) => n.remove())
@@ -694,6 +703,8 @@ function tightSvg(html, mode, hex) {
   host.remove()
   return out
 }
+
+const RELIEF_EXPORT_SCALE = 84 / 1000
 
 async function buildExportSvg() {
   const text = nameField.value
@@ -708,9 +719,12 @@ async function buildExportSvg() {
   if (def.id === 'relief') {
     await loadRelief()
     const built = reliefSvgMarkup(text, '', 'r-xl')
-    // give stroke a concrete colour and width for the file
+    // Concrete colour and width for the file. Font units (1000/em) are
+    // scaled to an 84px em so the viewBox, PNG and PDF are display-sized.
     const svg = built.html
       .replace('stroke="currentColor"', `stroke="${hex}" stroke-width="40"`)
+      .replace(/(<svg[^>]*>)/, `$1<g transform="scale(${RELIEF_EXPORT_SCALE})">`)
+      .replace(/<\/svg>$/, '</g></svg>')
     return { ...tightSvg(svg, 'stroke', hex), mode: 'stroke' }
   }
   await loadOutlines()
@@ -873,20 +887,26 @@ function pathToCommands(d) {
       cy = rel ? cy + f : f
       cmds.push(['C', X1, Y1, X2, Y2, cx, cy])
       x1 = X2; y1 = Y2
-    } else if (C === 'Q') {
-      const [a, b, e, f] = take(4)
-      const X1 = rel ? cx + a : a, Y1 = rel ? cy + b : b
-      cx = rel ? cx + e : e
-      cy = rel ? cy + f : f
-      cmds.push(['Q', X1, Y1, cx, cy])
-      x1 = X1; y1 = Y1
-    } else if (C === 'T') {
+    } else if (C === 'Q' || C === 'T') {
+      let X1, Y1
+      if (C === 'Q') {
+        const [a, b] = take(2)
+        X1 = rel ? cx + a : a
+        Y1 = rel ? cy + b : b
+      } else {
+        const smooth = lc.toUpperCase() === 'Q' || lc.toUpperCase() === 'T'
+        X1 = smooth ? 2 * cx - x1 : cx
+        Y1 = smooth ? 2 * cy - y1 : cy
+      }
       const [e, f] = take(2)
-      const X1 = lc.toUpperCase() === 'Q' || lc.toUpperCase() === 'T' ? 2 * cx - x1 : cx
-      const Y1 = lc.toUpperCase() === 'Q' || lc.toUpperCase() === 'T' ? 2 * cy - y1 : cy
+      const x0 = cx, y0 = cy
       cx = rel ? cx + e : e
       cy = rel ? cy + f : f
-      cmds.push(['Q', X1, Y1, cx, cy])
+      // Exact quadratic-to-cubic: controls sit 2/3 of the way to the quadratic control.
+      cmds.push(['C',
+        x0 + (2 / 3) * (X1 - x0), y0 + (2 / 3) * (Y1 - y0),
+        cx + (2 / 3) * (X1 - cx), cy + (2 / 3) * (Y1 - cy),
+        cx, cy])
       x1 = X1; y1 = Y1
     } else if (C === 'Z') {
       cmds.push(['Z'])
@@ -922,6 +942,60 @@ function parseTransform(tr) {
   return [a, b, c, d, e, f]
 }
 
+function mulMat(A, B) {
+  return [
+    A[0] * B[0] + A[2] * B[1], A[1] * B[0] + A[3] * B[1],
+    A[0] * B[2] + A[2] * B[3], A[1] * B[2] + A[3] * B[3],
+    A[0] * B[4] + A[2] * B[5] + A[4], A[1] * B[4] + A[3] * B[5] + A[5],
+  ]
+}
+
+/* Map an <svg> element's user space into its parent's (x/y + viewBox, xMidYMid meet).
+   For the root, only the viewBox origin and scale apply. */
+function svgViewportMat(svg, isRoot) {
+  const vb = (svg.getAttribute('viewBox') || '').trim().split(/[\s,]+/).map(Number)
+  const x = isRoot ? 0 : parseFloat(svg.getAttribute('x')) || 0
+  const y = isRoot ? 0 : parseFloat(svg.getAttribute('y')) || 0
+  if (vb.length !== 4 || vb.some((n) => !isFinite(n)) || vb[2] <= 0 || vb[3] <= 0) {
+    return [1, 0, 0, 1, x, y]
+  }
+  const [vx, vy, vw, vh] = vb
+  if (isRoot) return [1, 0, 0, 1, -vx, -vy]
+  const w = parseFloat(svg.getAttribute('width')) || vw
+  const h = parseFloat(svg.getAttribute('height')) || vh
+  const k = Math.min(w / vw, h / vh)
+  const tx = x + (w - vw * k) / 2 - vx * k
+  const ty = y + (h - vh * k) / 2 - vy * k
+  return [k, 0, 0, k, tx, ty]
+}
+
+/* Full matrix from a path's own space to the root viewBox (origin at 0,0). */
+function pathToRootMat(el) {
+  let M = parseTransform(el.getAttribute('transform') || '')
+  let p = el.parentElement
+  while (p && p.tagName) {
+    const tag = p.tagName.toLowerCase()
+    if (tag === 'svg') {
+      const parentSvg = p.parentElement && p.parentElement.closest ? p.parentElement.closest('svg') : null
+      M = mulMat(svgViewportMat(p, !parentSvg), M)
+      if (!parentSvg) break
+    }
+    if (tag !== 'svg' && p.getAttribute('transform')) {
+      M = mulMat(parseTransform(p.getAttribute('transform')), M)
+    }
+    p = p.parentElement
+  }
+  return M
+}
+
+function inheritedStrokeWidth(el) {
+  for (let p = el; p && p.getAttribute; p = p.parentElement) {
+    const v = parseFloat(p.getAttribute('stroke-width'))
+    if (isFinite(v)) return v
+  }
+  return 1
+}
+
 function applyMat(M, x, y) {
   return [M[0] * x + M[2] * y + M[4], M[1] * x + M[3] * y + M[5]]
 }
@@ -946,25 +1020,15 @@ function buildPdf(width, height, pathEls, mode, hex) {
   const col = `${r.toFixed(3)} ${g.toFixed(3)} ${b.toFixed(3)}`
   const chunks = [`q`, `${col} RG`, `${col} rg`, '1 J', '1 j', `${Math.max(0.6, s).toFixed(3)} w`]
   pathEls.forEach((el) => {
-    let M = parseTransform(el.getAttribute('transform') || '')
-    // walk parent transforms
-    let p = el.parentElement
-    while (p && p.tagName && p.tagName.toLowerCase() !== 'svg') {
-      if (p.getAttribute && p.getAttribute('transform')) {
-        const P = parseTransform(p.getAttribute('transform'))
-        // parent first
-        const mul = (A, B) => [
-          A[0] * B[0] + A[2] * B[1], A[1] * B[0] + A[3] * B[1],
-          A[0] * B[2] + A[2] * B[3], A[1] * B[2] + A[3] * B[3],
-          A[0] * B[4] + A[2] * B[5] + A[4], A[1] * B[4] + A[3] * B[5] + A[5],
-        ]
-        M = mul(P, M)
-      }
-      p = p.parentElement
-    }
+    // Every ancestor transform and nested <svg> viewport, up to the root viewBox.
+    const M = pathToRootMat(el)
     const d = el.getAttribute('d') || ''
     const cmds = pathToCommands(d)
     const ops = []
+    if (mode !== 'fill') {
+      const lw = inheritedStrokeWidth(el) * Math.sqrt(Math.abs(M[0] * M[3] - M[1] * M[2])) * s
+      ops.push(`${Math.max(0.6, lw).toFixed(3)} w`)
+    }
     cmds.forEach((cmd) => {
       if (cmd[0] === 'M') {
         const [x, y] = applyMat(M, cmd[1], cmd[2])
@@ -981,17 +1045,6 @@ function buildPdf(width, height, pathEls, mode, hex) {
           `${(pad + p2[0] * s).toFixed(2)} ${(H - pad - p2[1] * s).toFixed(2)} ` +
           `${(pad + p3[0] * s).toFixed(2)} ${(H - pad - p3[1] * s).toFixed(2)} c`
         )
-      } else if (cmd[0] === 'Q') {
-        // raise quadratic to cubic
-        const [x0, y0] = ops.length ? [0, 0] : applyMat(M, cmd[3], cmd[4])
-        // last point not stored — approximate with c by expanding from current
-        const q = applyMat(M, cmd[1], cmd[2])
-        const end = applyMat(M, cmd[3], cmd[4])
-        ops.push(
-          `${(pad + q[0] * s).toFixed(2)} ${(H - pad - q[1] * s).toFixed(2)} ` +
-          `${(pad + q[0] * s).toFixed(2)} ${(H - pad - q[1] * s).toFixed(2)} ` +
-          `${(pad + end[0] * s).toFixed(2)} ${(H - pad - end[1] * s).toFixed(2)} c`
-        )
       } else if (cmd[0] === 'Z') ops.push('h')
     })
     ops.push(mode === 'fill' ? 'f' : 'S')
@@ -1003,7 +1056,7 @@ function buildPdf(width, height, pathEls, mode, hex) {
   const add = (s) => { objects.push(s); return objects.length }
   const o1 = add('<< /Type /Catalog /Pages 2 0 R >>')
   const o2 = add('<< /Type /Pages /Kids [3 0 R] /Count 1 >>')
-  const o3 = add(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W.toFixed(2)} ${H.toFixed(2)}] /Contents 4 0 R /Resources << >> >>`)
+  const o3 = add(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W.toFixed(2)} ${H.toFixed(2)}] /Group << /Type /Group /S /Transparency /I true /CS /DeviceRGB >> /Contents 4 0 R /Resources << >> >>`)
   const stream = content
   const o4 = add(`<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`)
   let body = '%PDF-1.4\n'
