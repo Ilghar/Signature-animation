@@ -190,11 +190,35 @@ function placeholderEl(ch) {
   return el
 }
 
-function drawHandUnit(unit, animate) {
+
+/* Scale the Signed-by canvas to about 60% of the panel width. */
+const SIG_PANEL_FILL = 0.6
+
+function resetSignatureFit() {
+  if (!signMain) return
+  signMain.style.transform = 'none'
+  signMain.style.marginBottom = '0'
+}
+
+function fitSignature() {
+  if (!sigPreview || !signMain) return
+  resetSignatureFit()
+  if (!signMain.childElementCount) return
+  const panel = sigPreview.clientWidth
+  if (panel < 1) return
+  const w = signMain.scrollWidth
+  const h = signMain.scrollHeight
+  if (w < 1) return
+  const scale = (panel * SIG_PANEL_FILL) / w
+  signMain.style.transformOrigin = 'top center'
+  signMain.style.transform = 'scale(' + scale + ')'
+  signMain.style.marginBottom = (h * (scale - 1)) + 'px'
+}
+
+function createHandUnit(unit) {
   if (/^\s$/.test(unit[0]) && unit.length === 1) {
     signMain.appendChild(makeSpace())
-    markWordEdges(signMain)
-    return Promise.resolve()
+    return async () => {}
   }
   const base = unit[0]
   const marks = unit.slice(1).split('')
@@ -203,41 +227,41 @@ function drawHandUnit(unit, animate) {
   if (i < 0) {
     signMain.appendChild(placeholderEl(unitNFC(unit)))
     const path = signMain.lastChild.querySelector('path')
-    return path ? strokeIn(path, path.getTotalLength(), animate, 0) : Promise.resolve()
+    return async (animate) => {
+      if (!path) return
+      let len = 16
+      try { len = path.getTotalLength() } catch (e) { /* ignore */ }
+      await strokeIn(path, len, animate, 0)
+    }
   }
   const upper = base !== base.toLowerCase()
   const letter = document.createElement('div')
   letter.innerHTML = (upper ? uppercase : lowercase)[i].innerHTML
   letter.classList.add('letter', upper ? 'up' : 'lo', ALPHABET[i])
   signMain.appendChild(letter)
-  markWordEdges(signMain)
   const basePath = letter.querySelector('svg path')
   const accEls = []
   marks.forEach((m) => {
-    if (m in ACCENTS) accEls.push(addAccent(letter, m, upper, animate))
+    if (m in ACCENTS) accEls.push(addAccent(letter, m, upper, false))
   })
   if (!knownMarks) {
     marks.filter((m) => !(m in ACCENTS)).forEach(() => {
       letter.appendChild(placeholderEl('◌'))
     })
   }
-  const run = async () => {
-    if (basePath) {
-      let len = 40
-      try { len = basePath.getTotalLength() } catch (e) { /* ignore */ }
-      await strokeIn(basePath, len, animate, 0)
-    }
-    for (const acc of accEls) {
-      if (!acc) continue
-      const paths = [...acc.querySelectorAll('path')]
-      for (const p of paths) {
-        let len = 12
-        try { len = Math.max(8, p.getTotalLength()) } catch (e) { /* ignore */ }
-        await strokeIn(p, len, animate, 0)
-      }
+  const paths = []
+  if (basePath) paths.push({ path: basePath, fallback: 40 })
+  accEls.forEach((acc) => {
+    if (!acc) return
+    acc.querySelectorAll('path').forEach((p) => paths.push({ path: p, fallback: 12 }))
+  })
+  return async (animate) => {
+    for (const item of paths) {
+      let len = item.fallback
+      try { len = Math.max(item.fallback === 12 ? 8 : len, item.path.getTotalLength()) } catch (e) { /* ignore */ }
+      await strokeIn(item.path, len, animate, 0)
     }
   }
-  return run()
 }
 
 async function renderHand(value, animateFrom, gen) {
@@ -249,12 +273,17 @@ async function renderHand(value, animateFrom, gen) {
     sigPreview.classList.remove('mode-fill', 'is-wiping')
   }
   const list = units(value)
+  const plays = []
   for (let i = 0; i < list.length; i++) {
     if (gen !== playGen) return
-    const animate = i >= animateFrom
-    await drawHandUnit(list[i], animate)
+    plays.push(createHandUnit(list[i]))
   }
   markWordEdges(signMain)
+  fitSignature()
+  for (let i = 0; i < plays.length; i++) {
+    if (gen !== playGen) return
+    await plays[i](i >= animateFrom)
+  }
 }
 
 /* ---------- Relief SingleLine ---------- */
@@ -354,6 +383,7 @@ async function renderRelief(value, animate, gen) {
   signMain.innerHTML = built.html
   const svg = signMain.querySelector('svg')
   if (!svg) return
+  fitSignature()
   const paths = [...svg.querySelectorAll('path')]
   if (!animate || prefersReducedOrInstant()) {
     paths.forEach((p) => {
@@ -446,6 +476,7 @@ async function renderFill(fontId, value, animate, gen) {
   sigPreview.classList.remove('mode-stroke')
   const built = filledSvgMarkup(fontId, value, '', 84)
   signMain.innerHTML = built.html
+  fitSignature()
   if (animate && !prefersReducedOrInstant()) {
     sigPreview.classList.remove('is-wiping')
     void sigPreview.offsetWidth
@@ -465,6 +496,7 @@ async function render(value, animateFrom) {
   if (signBtn) signBtn.disabled = !has || !value.trim()
   if (!has) {
     signMain.innerHTML = ''
+    resetSignatureFit()
     return
   }
   const def = fontDef(currentFont)
@@ -1170,6 +1202,17 @@ function init() {
   prevValue = ''
   if (nameField && nameField.value) onInput()
   fillPickerTiles()
+  window.addEventListener('resize', fitSignature)
+  if (window.ResizeObserver && sigPreview) {
+    let lastW = sigPreview.clientWidth
+    new ResizeObserver(() => {
+      const w = sigPreview.clientWidth
+      if (w !== lastW) {
+        lastW = w
+        fitSignature()
+      }
+    }).observe(sigPreview)
+  }
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init)
@@ -1186,8 +1229,30 @@ window.__sig = {
   currentInkHex,
   buildExportSvg,
   fontDef,
+  fitSignature,
   get font() { return currentFont },
   get ink() { return currentInkHex() },
+  async buildExportPdf() {
+    const out = await buildExportSvg()
+    const host = document.createElement('div')
+    host.style.cssText = 'position:absolute;left:-9999px;top:0'
+    host.innerHTML = out.text
+    document.body.appendChild(host)
+    const svg = host.querySelector('svg')
+    const paths = svg ? [...svg.querySelectorAll('path')] : []
+    const pdf = buildPdf(out.width, out.height, paths, out.mode, currentInkHex())
+    host.remove()
+    const buf = new Uint8Array(await pdf.arrayBuffer())
+    return {
+      name: fileBase() + '.pdf',
+      bytes: Array.from(buf),
+      svg: out.text,
+      width: out.width,
+      height: out.height,
+      mode: out.mode,
+      hex: currentInkHex(),
+    }
+  },
   setTheme(theme) {
     const n = theme === 'dark' ? 'dark' : 'light'
     document.documentElement.setAttribute('data-theme', n)

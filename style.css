@@ -39,7 +39,7 @@
 .signature{margin-top:24px;padding:4px 0 10px;border-bottom:1px solid var(--line);text-align:center}
 .signed-by{
   font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--label);
-  padding-bottom:2px;text-align:center
+  padding-bottom:2px;text-align:center;opacity:1
 }
 .signed-by.is-on{opacity:1}
 
@@ -54,6 +54,34 @@
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme=light]) .sig-preview{--ink-current:var(--mauve-em)}
+}
+
+/* Signed-by canvas only: fill ~60% of the panel, ink at full opacity.
+   Picker tiles keep the compact .sig-preview rules above. */
+#sig-preview{
+  display:flex;justify-content:center;width:100%;overflow:visible;opacity:1;
+  --ink-current:var(--plum)
+}
+[data-theme=dark] #sig-preview{--ink-current:#856a8e}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme=light]) #sig-preview{--ink-current:#856a8e}
+}
+#sig-preview,
+#sig-preview .signature-main,
+#sig-preview path{
+  opacity:1;stroke-opacity:1;fill-opacity:1
+}
+#sig-preview .signature-main{
+  display:flex;flex-flow:nowrap;justify-content:center;align-items:center;
+  width:max-content;max-width:none;transform-origin:top center
+}
+#sig-preview .sig-relief,
+#sig-preview .sig-filled{
+  max-width:none;width:auto;height:84px
+}
+@media (max-width:767px){
+  #sig-preview .sig-relief,
+  #sig-preview .sig-filled{height:58px}
 }
 
 .signature-main{
@@ -582,3 +610,4 @@
 .howto{margin-top:16px}
 .embed-block{margin-top:12px}
 .embed-block .label{margin-top:12px}
+.embed-block pre{font:400 13px/1.45 var(--font)}

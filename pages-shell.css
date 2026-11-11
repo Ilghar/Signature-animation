@@ -51,6 +51,6 @@ section[aria-label="Live function"] .frame > *,
 .embed-block{margin-top:16px}
 .embed-block pre{
   margin:8px 0 0;padding:12px 14px;overflow:auto;max-width:100%;
-  font:400 13px/1.45 monospace; /* wait - monospace might be ok as generic? CI GENERIC includes monospace */
+  font:400 13px/1.45 var(--font);
   color:var(--fg);background:var(--glass);border:1px solid var(--glass-edge);border-radius:var(--r-frame)
 }
