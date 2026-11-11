@@ -6,18 +6,18 @@ jobs:
   webkit-shots:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    # Host apt for --with-deps hung for 22 minutes on a bare runner.
+    # The official image already has the WebKit system libraries.
+    container: mcr.microsoft.com/playwright:v1.65.0-noble
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "22"
       - name: Install Playwright
-        run: npm install --no-save playwright
+        run: npm install --no-save playwright@1.65.0
       - name: Install WebKit
         env:
           CI: true
           DEBIAN_FRONTEND: noninteractive
-        run: npx --no-install playwright install --with-deps webkit
+        run: npx playwright install --with-deps webkit
       - name: Serve the site and screenshot in WebKit
         run: |
           python3 -m http.server 8080 --bind 127.0.0.1 &
