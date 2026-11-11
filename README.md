@@ -15,8 +15,8 @@
 |---|---|
 
 ## How it works
-- Type a name in the field.
-- Each keystroke adds that letter's SVG path from the letter bank, and CSS draws the stroke.
-- Sign redraws the full name as the completed animated signature.
+- Type or paste a name. The default Hand-traced bank (and Relief SingleLine) draws each stroke; Allura, Great Vibes, Dancing Script and Caveat wipe in from the left.
+- Sign (or Enter) replays the full name. Accents such as ā and è are drawn; unknown characters show a placeholder instead of disappearing.
+- Download a transparent SVG, PNG (2× or 4×) or PDF of the paths, or copy the inline SVG and `<img>` snippets. In Word, Google Docs or Photoshop, insert the SVG or PNG as a picture.
 
 <sub>ilghar.studio</sub>

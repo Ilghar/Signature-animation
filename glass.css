@@ -1,0 +1,26 @@
+/* Isolated LAYOUT v2 glass.
+   Uses only the v2 tokens: --glass, --glass-edge, --sh-l, --sh-d, --well, --r-frame.
+   No extra lift, heavier blur, or liquid-glass shadows.
+   Swap this file when the bolder liquid-glass mock lands.
+   Frames have no drop shadow (CI). Control shadows stay on tokens.css. */
+
+.glass-frame,
+#app-frame{
+  background:var(--glass);
+  -webkit-backdrop-filter:blur(12px) saturate(1.1);
+  backdrop-filter:blur(12px) saturate(1.1);
+  border:1px solid var(--glass-edge);
+  border-radius:var(--r-frame);
+  box-shadow:none;
+  padding:0;
+  overflow:visible
+}
+
+.field{
+  background:var(--well);
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+  border:1px solid var(--glass-edge);
+  border-radius:var(--r-frame);
+  box-shadow:inset 2px 2px 5px var(--sh-d),inset -2px -2px 5px var(--sh-l)
+}

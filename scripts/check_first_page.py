@@ -1149,6 +1149,11 @@ def main() -> int:
     for p in iter_files():
         rel = p.relative_to(ROOT).as_posix()
         suf = p.suffix.lower()
+        # Signature fonts and their outline atlas: script faces live only
+        # under fonts/signature/ (LAYOUT v2 exception). Do not scan them
+        # as page chrome.
+        if rel.startswith("fonts/signature/"):
+            continue
 
         if suf in TEXT_EXT:
             if not is_full_allowlisted(p, full):
