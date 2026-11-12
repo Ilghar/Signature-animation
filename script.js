@@ -23,7 +23,11 @@ const ACCENTS = {
 }
 
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
-const PREVIEW_TEXT = 'Hāèl'
+// Generic sample text for the six typeface frames until someone presses Sign (Hāèl, 11-12: ilghar.studio).
+const PREVIEW_TEXT = 'ilghar.studio'
+/* The six frames show the last SIGNED text: Sign (or Enter) repaints them, typing does not. */
+let tileText = PREVIEW_TEXT
+let tileGen = 0
 /* Fixed word gap. Hand-traced letters drop outward negative side bearings
    at word edges so this gap cannot be eaten by .lo.l / .up.i margins. */
 const WORD_SPACE = 16
@@ -179,6 +183,16 @@ function addAccent(letter, mark, upper, animate) {
   return acc
 }
 
+/* The stroke bank has no full stop; draw one short round-capped stroke on the baseline so "ilghar.studio" signs cleanly. */
+function periodEl() {
+  const el = document.createElement('div')
+  el.classList.add('letter', 'lo', 'period')
+  el.innerHTML =
+    '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 51" height="51" width="6" aria-hidden="true">' +
+    '<path d="M2.6 29.3C3.1 28.9 3.8 29.2 3.7 29.8C3.6 30.3 2.9 30.4 2.6 29.9"></path></svg>'
+  return el
+}
+
 function placeholderEl(ch) {
   const el = document.createElement('div')
   el.classList.add('fallback')
@@ -224,6 +238,13 @@ function createHandUnit(unit) {
   const marks = unit.slice(1).split('')
   const i = ALPHABET.indexOf(base.toLowerCase())
   const knownMarks = marks.every((m) => m in ACCENTS)
+  if (base === '.' && !marks.length) {
+    signMain.appendChild(periodEl())
+    const path = signMain.lastChild.querySelector('path')
+    return async (animate) => {
+      if (path) await strokeIn(path, 4, animate, 0)
+    }
+  }
   if (i < 0) {
     signMain.appendChild(placeholderEl(unitNFC(unit)))
     const path = signMain.lastChild.querySelector('path')
@@ -527,6 +548,7 @@ function replay() {
   if (!nameField.value.trim()) return
   prevValue = nameField.value
   render(nameField.value, 0)
+  fillPickerTiles(nameField.value)
 }
 
 /* ---------- picker ---------- */
@@ -535,29 +557,29 @@ function checkSvg() {
   return '<svg class="check" viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg>'
 }
 
-async function fillPickerTiles() {
+/* Paint the six frames. Called with the field value on Sign / Enter; called with no text
+   (page load, opening the picker) it repaints the last signed text. A newer call wins. */
+async function fillPickerTiles(text) {
   const list = document.querySelector('#font-list')
   if (!list) return
-  // Hand-traced tile: clone a compact Hāèl from the bank once fonts/banks exist
+  if (typeof text === 'string' && text.trim()) tileText = text.trim()
+  const t = tileText
+  const gen = ++tileGen
+  list.setAttribute('data-signed', t)
   const handPrev = list.querySelector('[data-font="hand-traced"] .prev')
-  if (handPrev && !handPrev.hasChildNodes()) {
-    const tmp = document.createElement('div')
-    tmp.className = 'signature-main mode-stroke'
-    // build without animation by temporarily pointing signMain
-    const saved = signMain
-    // simpler: render into the tile directly
-    await paintHandPreview(handPrev, PREVIEW_TEXT)
-  }
+  if (handPrev) await paintHandPreview(handPrev, t)
   try {
     await loadRelief()
+    if (gen !== tileGen) return
     const relPrev = list.querySelector('[data-font="relief"] .prev')
-    if (relPrev) relPrev.innerHTML = reliefSvgMarkup(PREVIEW_TEXT, '', 'r-prev').html
+    if (relPrev) relPrev.innerHTML = reliefSvgMarkup(t, '', 'r-prev').html
   } catch (e) { console.warn('Relief preview', e) }
   try {
     await loadOutlines()
+    if (gen !== tileGen) return
     FONTS.filter((f) => f.mode === 'fill').forEach((f) => {
       const node = list.querySelector(`[data-font="${f.id}"] .prev`)
-      if (node) node.innerHTML = filledSvgMarkup(f.id, PREVIEW_TEXT, '', 40).html.replace('r-xl', 'r-prev')
+      if (node) node.innerHTML = filledSvgMarkup(f.id, t, '', 40).html.replace('r-xl', 'r-prev')
     })
   } catch (e) { console.warn('Outline preview', e) }
 }
@@ -578,6 +600,14 @@ async function paintHandPreview(host, text) {
     const base = unit[0]
     const marks = unit.slice(1).split('')
     const i = ALPHABET.indexOf(base.toLowerCase())
+    if (base === '.' && !marks.length) {
+      const dot = periodEl()
+      const p = dot.querySelector('path')
+      p.style.transition = 'none'
+      p.style.strokeDashoffset = '0'
+      wrap.appendChild(dot)
+      return
+    }
     if (i < 0) {
       wrap.appendChild(placeholderEl(unitNFC(unit)))
       return

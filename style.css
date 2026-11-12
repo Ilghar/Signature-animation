@@ -33,7 +33,8 @@
   font-size:13px;letter-spacing:.12em;text-transform:uppercase;
   padding:0 16px;cursor:pointer
 }
-.sign svg{width:12px;height:12px;flex:none}
+.sign svg{width:18px;height:18px;flex:none;overflow:visible}
+.sign svg .sign-dot{fill:var(--dc)}
 .sign:disabled{opacity:.45;cursor:not-allowed}
 
 .signature{margin-top:24px;padding:4px 0 10px;border-bottom:1px solid var(--line);text-align:center}
@@ -548,6 +549,21 @@
 [data-theme=dark] .opt[aria-selected=true] .prev,
 [data-theme=dark] .sw.custom{color:var(--on-dark)}
 [data-theme=dark] .opt[aria-selected=true] .check{stroke:var(--on-dark)}
+
+/* Hāèl, 12 Nov 2026: dark Sign button and Live pill fill #7d6a8c (Hāèl picked from his list; #745a7a read as cherry).
+   Label #f9fafb is 4.66:1 on that fill. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme=light]) .sign,
+  :root:not([data-theme=light]) .status,
+  :root:not([data-theme=light]) .badge{
+    background:var(--pink-fill-dark);color:var(--paper);border:0
+  }
+}
+[data-theme=dark] .sign,
+[data-theme=dark] .status,
+[data-theme=dark] .badge{
+  background:var(--pink-fill-dark);color:var(--paper);border:0
+}
 
 /* pink ring only for keyboard focus */
 :focus{outline:none}
