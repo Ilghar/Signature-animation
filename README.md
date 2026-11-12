@@ -2,7 +2,7 @@
   <a href="https://ilghar.github.io/Signature-animation/">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/hero/hero-dark.webp">
-      <img src="docs/hero/hero-light.webp" width="100%" alt="The live signature after Sign: ilghar.studio drawn as SVG strokes, with a diamond placeholder for the full stop.">
+      <img src="docs/hero/hero-light.webp" width="100%" alt="The live signature after Sign: Hāèl drawn as SVG strokes.">
     </picture>
   </a>
 </p>
@@ -11,7 +11,7 @@
 
 <p align="center"><a href="https://ilghar.github.io/Signature-animation/">Open the live app</a> · <a href="https://github.com/Ilghar/Signature-animation">Repository</a> · <a href="https://ilghar.studio">ilghar.studio</a></p>
 
-| <picture><source media="(prefers-color-scheme: dark)" srcset="docs/hero/f1-dark.webp"><img src="docs/hero/f1-light.webp" width="100%" alt="The live name field while typing ilghar., with letters starting to draw as SVG strokes and a placeholder for the full stop."></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="docs/hero/f2-dark.webp"><img src="docs/hero/f2-light.webp" width="100%" alt="The finished live signature after Sign, with every stroke of ilghar.studio drawn."></picture> |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="docs/hero/f1-dark.webp"><img src="docs/hero/f1-light.webp" width="100%" alt="The live name field while typing Hāèl, with letters starting to draw as SVG strokes."></picture> | <picture><source media="(prefers-color-scheme: dark)" srcset="docs/hero/f2-dark.webp"><img src="docs/hero/f2-light.webp" width="100%" alt="The finished live signature after Sign, with every stroke of Hāèl drawn."></picture> |
 |---|---|
 
 ## How it works
