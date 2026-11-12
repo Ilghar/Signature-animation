@@ -550,8 +550,8 @@
 [data-theme=dark] .sw.custom{color:var(--on-dark)}
 [data-theme=dark] .opt[aria-selected=true] .check{stroke:var(--on-dark)}
 
-/* Hāèl, 12 Nov 2026: dark Sign button and Live pill fill #745a7a.
-   Label #f9fafb is 5.76:1 on that fill. */
+/* Hāèl, 12 Nov 2026: dark Sign button and Live pill fill #7d6a8c (Hāèl picked from his list; #745a7a read as cherry).
+   Label #f9fafb is 4.66:1 on that fill. */
 @media (prefers-color-scheme:dark){
   :root:not([data-theme=light]) .sign,
   :root:not([data-theme=light]) .status,
