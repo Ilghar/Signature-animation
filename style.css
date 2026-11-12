@@ -549,6 +549,21 @@
 [data-theme=dark] .sw.custom{color:var(--on-dark)}
 [data-theme=dark] .opt[aria-selected=true] .check{stroke:var(--on-dark)}
 
+/* Hāèl, 12 Nov 2026: dark Sign button and Live pill fill #745a7a.
+   Label #f9fafb is 5.76:1 on that fill. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme=light]) .sign,
+  :root:not([data-theme=light]) .status,
+  :root:not([data-theme=light]) .badge{
+    background:var(--pink-fill-dark);color:var(--paper);border:0
+  }
+}
+[data-theme=dark] .sign,
+[data-theme=dark] .status,
+[data-theme=dark] .badge{
+  background:var(--pink-fill-dark);color:var(--paper);border:0
+}
+
 /* pink ring only for keyboard focus */
 :focus{outline:none}
 :focus-visible{outline:2px solid var(--ring);outline-offset:3px}

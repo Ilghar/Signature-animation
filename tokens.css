@@ -3,11 +3,11 @@
 :root{
   --paper:#f9fafb; --ink:#5a515c; --plum:#473448;
   --mauve-em:#856a8e; --mauve-line:#7d5a7c; --mauve-label:#775a76;
-  --grey:#948e95; --grey-soft:#a6a1a7; --pink:#fcb4c4; --pink-mark-light:#aa527d; --pink-mark-dark:#fcb4c4; --card:#2a272d; --on-dark:#d4d2d2;
+  --grey:#948e95; --grey-soft:#a6a1a7; --pink:#fcb4c4; --pink-mark-light:#b78597; --pink-mark-dark:#fcb4c4; --pink-glass:#da94af; --pink-fill-dark:#745a7a; --card:#2a272d; --on-dark:#d4d2d2;
   /* roles (light) */
   --canvas:var(--paper); --surface:var(--paper); --fg:var(--ink); --name:var(--plum);
   --sec:var(--mauve-line); --label:var(--mauve-label); --line:var(--mauve-em); --muted:var(--mauve-line);
-  --dc:var(--pink-mark-light); --ring:var(--pink-mark-light);
+  --dc:var(--pink-mark-light); --ring:var(--pink-mark-light); --glass-accent:var(--pink-glass);
   /* glass + soft shadow (palette-derived alphas only) */
   --glass:rgba(249,250,251,.55); --glass-edge:rgba(255,255,255,.75);
   --sh-d:rgba(71,52,72,.16); --sh-l:rgba(255,255,255,.9); --well:rgba(71,52,72,.10);
@@ -24,7 +24,7 @@
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){
   --canvas:var(--card); --surface:var(--card); --fg:var(--on-dark); --name:var(--mauve-em);
-  --sec:var(--grey-soft); --label:var(--grey-soft); --line:var(--grey-soft); --muted:var(--grey-soft); --dc:var(--pink-mark-dark); --ring:var(--pink-mark-dark);
+  --sec:var(--grey-soft); --label:var(--grey-soft); --line:var(--grey-soft); --muted:var(--grey-soft); --dc:var(--pink-mark-dark); --ring:var(--pink-mark-dark); --glass-accent:var(--pink-mark-dark);
   --glass:rgba(48,45,52,.55); --glass-edge:rgba(255,255,255,.10);
   --sh-d:rgba(0,0,0,.38); --sh-l:rgba(255,255,255,.06); --well:rgba(0,0,0,.28);
   --sig:var(--mauve-em); --on-tint:var(--on-dark);
@@ -32,7 +32,7 @@
   --bg1:rgba(133,106,142,.46); --bg2:rgba(148,142,149,.30); --bg3:rgba(125,90,124,.36); color-scheme:dark}}
 [data-theme=dark]{
   --canvas:var(--card); --surface:var(--card); --fg:var(--on-dark); --name:var(--mauve-em);
-  --sec:var(--grey-soft); --label:var(--grey-soft); --line:var(--grey-soft); --muted:var(--grey-soft); --dc:var(--pink-mark-dark); --ring:var(--pink-mark-dark);
+  --sec:var(--grey-soft); --label:var(--grey-soft); --line:var(--grey-soft); --muted:var(--grey-soft); --dc:var(--pink-mark-dark); --ring:var(--pink-mark-dark); --glass-accent:var(--pink-mark-dark);
   --glass:rgba(48,45,52,.55); --glass-edge:rgba(255,255,255,.10);
   --sh-d:rgba(0,0,0,.38); --sh-l:rgba(255,255,255,.06); --well:rgba(0,0,0,.28);
   --sig:var(--mauve-em); --on-tint:var(--on-dark);
@@ -50,6 +50,8 @@ img,svg,video,iframe,canvas,figure{max-width:100%;height:auto}
 h1,.name{font-size:24px;font-weight:400;letter-spacing:.14em;line-height:1.3;text-transform:uppercase;color:var(--name);margin:0}
 @media (min-width:768px){h1,.name{font-size:31px;letter-spacing:.2em}}
 .dc,.first{color:var(--dc)}
+/* First letters on the measured glass base #b8adb1 use mauve #856a8e, not #b78597 (1.4:1). The live heading sits on paper, so it stays --dc. */
+
 h2{font-size:18px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--sec);margin:0 0 24px}
 @media (min-width:768px){h2{font-size:23px}}
 .panel h2{font-size:15px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px dotted var(--line)}
@@ -66,11 +68,11 @@ button,.glass{font:inherit;color:var(--fg);background:var(--glass);-webkit-backd
 button:hover{box-shadow:-2px -2px 6px var(--sh-l),3px 3px 7px var(--sh-d),inset 0 1px 0 var(--glass-edge)}
 button:active,button[aria-pressed=true]{color:var(--name);box-shadow:inset 3px 3px 7px var(--sh-d),inset -3px -3px 7px var(--sh-l)}
 :focus-visible{outline:2px solid var(--ring);outline-offset:3px}
-input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;height:28px;accent-color:var(--dc)}
+input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;height:28px;accent-color:var(--glass-accent)}
 input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:var(--r-track);background:var(--well);box-shadow:inset 2px 2px 4px var(--sh-d),inset -2px -2px 4px var(--sh-l)}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;margin-top:-7px;border-radius:50%;background:var(--glass);border:1px solid var(--glass-edge);box-shadow:-2px -2px 5px var(--sh-l),3px 3px 7px var(--sh-d),inset 0 0 0 5px var(--dc)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;margin-top:-7px;border-radius:50%;background:var(--glass);border:1px solid var(--glass-edge);box-shadow:-2px -2px 5px var(--sh-l),3px 3px 7px var(--sh-d),inset 0 0 0 5px var(--glass-accent)}
 input[type=range]::-moz-range-track{height:8px;border-radius:var(--r-track);background:var(--well);box-shadow:inset 2px 2px 4px var(--sh-d)}
-input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--glass);border:1px solid var(--glass-edge);box-shadow:3px 3px 7px var(--sh-d),inset 0 0 0 5px var(--dc)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--glass);border:1px solid var(--glass-edge);box-shadow:3px 3px 7px var(--sh-d),inset 0 0 0 5px var(--glass-accent)}
 
 /* rhythm + grid */
 section{margin-top:64px} @media (max-width:767px){section{margin-top:48px}}
