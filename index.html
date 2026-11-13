@@ -393,23 +393,26 @@
   <section class="span12" aria-label="Project material">
     <h2>Project material</h2>
     <div class="grid-66">
+      <!-- Each example keeps its own theme when the page theme changes. -->
       <figure>
-        <div class="frame r1610">
-          <picture>
-            <source media="(prefers-color-scheme: dark)" srcset="hero/hero-light.svg">
-            <img src="hero/hero-light.svg" width="960" height="600" alt="Signature animation hero: SIGNATURE / ANIMATION wordmark with type-trace-sign cue.">
+        <div class="frame r43">
+          <picture data-light-src="hero/siganim-motion-light.png">
+            <source media="(prefers-reduced-motion: no-preference)" srcset="hero/siganim-motion-light.gif">
+            <source media="(prefers-color-scheme: dark)" srcset="hero/siganim-motion-light.png">
+            <img src="hero/siganim-motion-light.png" width="960" height="720" alt="The app draws ilghar.studio stroke by stroke in plum ink on the light canvas.">
           </picture>
         </div>
-        <figcaption>Hero board — light</figcaption>
+        <figcaption>Hand-traced signature · light</figcaption>
       </figure>
       <figure>
-        <div class="frame r1610">
-          <picture>
-            <source media="(prefers-color-scheme: dark)" srcset="hero/hero-dark.svg">
-            <img src="hero/hero-dark.svg" width="960" height="600" alt="Same hero board in the dark theme, token mauve on dark paper.">
+        <div class="frame r43">
+          <picture data-light-src="hero/siganim-motion-dark.png">
+            <source media="(prefers-reduced-motion: no-preference)" srcset="hero/siganim-motion-dark.gif">
+            <source media="(prefers-color-scheme: dark)" srcset="hero/siganim-motion-dark.png">
+            <img src="hero/siganim-motion-dark.png" width="960" height="720" alt="The app draws ilghar.studio stroke by stroke in mauve ink on the dark canvas.">
           </picture>
         </div>
-        <figcaption>Hero board — dark</figcaption>
+        <figcaption>Hand-traced signature · dark</figcaption>
       </figure>
     </div>
   </section>
